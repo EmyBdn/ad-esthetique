@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: ["dev", "master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Lancer ESLint
+        run: npm run lint
+
+      - name: Vérifier le build Next.js
+        run: npm run build
