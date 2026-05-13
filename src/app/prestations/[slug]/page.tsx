@@ -1,6 +1,7 @@
 import { prisma } from "../../../../lib/prisma";
 import Hero from "@/components/Hero";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export default async function PrestationDetailsPage({
   params,
@@ -40,7 +41,7 @@ export default async function PrestationDetailsPage({
               {/* Header de la carte (Image + Titre) */}
               {subcat.image && (
                 <div className="h-48 w-full overflow-hidden">
-                  <img
+                  <Image
                     src={subcat.image}
                     alt={subcat.label}
                     className="w-full h-full object-cover"

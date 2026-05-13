@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import { prisma } from "../../../lib/prisma";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function PrestationsPage() {
   const categories = await prisma.category.findMany({
@@ -24,7 +25,7 @@ export default async function PrestationsPage() {
               {/* Image de la catégorie */}
               <div className="aspect-video w-full overflow-hidden bg-gray-200">
                 {category.image ? (
-                  <img
+                  <Image
                     src={category.image}
                     alt={category.label}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"

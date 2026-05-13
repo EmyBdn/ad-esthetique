@@ -16,15 +16,15 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
 
   useEffect(() => {
     if (state !== null) {
-      if (state.success === true) {
+      if (state.success) {
         toast.success("Modifications effectuées");
         onClose();
       }
-      if (state.success === false) {
+      if (!state.success) {
         toast.error(state.error ?? "Impossible de mettre à jour la catégorie.");
       }
     }
-  }, [state]);
+  }, [state, onClose()]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>

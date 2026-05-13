@@ -16,16 +16,16 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
 
   useEffect(() => {
     if (state !== null) {
-      if (state.success === true) {
+      if (state.success) {
         toast.success("Service ajouté");
         onClose();
       }
 
-      if (state.success === false) {
+      if (!state.success) {
         toast.error(state.error ?? "Impossible de créer le services.");
       }
     }
-  }, [state]);
+  }, [state, onClose()]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>

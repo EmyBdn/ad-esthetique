@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -40,20 +41,20 @@ export default function Home() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               {/* Bouton Principal : Rond, changement de couleur au survol */}
-              <a
+              <Link
                 href="/rendez-vous"
                 className="inline-flex items-center justify-center rounded-full bg-[#1A2F1A] px-8 py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#B7D8A8] hover:text-[#1A2F1A]"
               >
                 Prendre rendez-vous
-              </a>
+              </Link>
 
               {/* Bouton Secondaire : Rond, changement de couleur au survol */}
-              <a
+              <Link
                 href="/prestations"
                 className="inline-flex items-center justify-center rounded-full border border-[#1A2F1A]/15 bg-white px-8 py-4 text-sm font-semibold text-[#1A2F1A] transition-colors duration-300 hover:bg-[#B7D8A8]/20"
               >
                 Voir les prestations
-              </a>
+              </Link>
             </div>
           </div>
         </div>

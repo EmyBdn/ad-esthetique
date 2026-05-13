@@ -7,6 +7,7 @@ import { useState } from "react";
 import { UpdateCategoryForm } from "@/components/admin/forms/UpdateCategoryForm";
 import { EditIcon } from "@/components/admin/icons/EditIcon";
 import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
+import Image from "next/image";
 export default function CategoryCard({ category }: { category: Category }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -36,7 +37,7 @@ export default function CategoryCard({ category }: { category: Category }) {
       >
         <div className="aspect-video overflow-hidden bg-gray-100">
           {category.image ? (
-            <img
+            <Image
               src={category.image}
               alt={category.label}
               className="h-full w-full object-cover"

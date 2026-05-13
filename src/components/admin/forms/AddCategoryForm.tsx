@@ -14,16 +14,16 @@ export function AddCategoryForm({ onClose }: Props) {
 
   useEffect(() => {
     if (state !== null) {
-      if (state.success === true) {
+      if (state.success) {
         toast.success("Catégorie ajoutée");
         onClose();
       }
 
-      if (state.success === false) {
+      if (!state.success) {
         toast.error(state.error ?? "Impossible de créer la catégorie.");
       }
     }
-  }, [state]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>

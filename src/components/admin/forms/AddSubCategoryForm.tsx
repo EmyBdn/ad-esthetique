@@ -16,16 +16,16 @@ export function AddSubCategoryForm({ onClose, category }: Props) {
 
   useEffect(() => {
     if (state !== null) {
-      if (state.success === true) {
+      if (state.success) {
         toast.success("Sous-catégorie ajoutée");
         onClose();
       }
 
-      if (state.success === false) {
+      if (!state.success) {
         toast.error(state.error ?? "Impossible de créer la sous-catégorie.");
       }
     }
-  }, [state]);
+  }, [state, onClose()]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>

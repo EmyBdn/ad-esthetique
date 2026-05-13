@@ -8,6 +8,7 @@ import { useState } from "react";
 import { UpdateSubCategoryForm } from "@/components/admin/forms/UpdateSubCategoryForm";
 import { AddServiceForm } from "@/components/admin/forms/AddServiceForm";
 import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
+import Image from "next/image";
 
 type Props = {
   subcategory: Subcategory;
@@ -25,7 +26,7 @@ export default function SubcategoryCard({ subcategory, services }: Props) {
       >
         {subcategory.image && (
           <div className="h-48 w-full overflow-hidden">
-            <img
+            <Image
               src={subcategory.image}
               alt={subcategory.label}
               className="w-full h-full object-cover"

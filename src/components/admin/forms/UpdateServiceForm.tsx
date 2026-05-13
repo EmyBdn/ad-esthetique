@@ -16,15 +16,15 @@ export function UpdateServiceForm({ onClose, service }: Props) {
 
   useEffect(() => {
     if (state !== null) {
-      if (state.success === true) {
+      if (state.success) {
         toast.success("Modifications effectuées");
         onClose();
       }
-      if (state.success === false) {
-        toast.error(state.error ?? "Impossible de mettre à jour le services");
+      if (!state.success) {
+        toast.error(state.error ?? "Impossible de mettre à jour la prestation");
       }
     }
-  }, [state]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
