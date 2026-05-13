@@ -1,0 +1,95 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+//Connexion à la DB
+datasource db {
+  provider = "postgresql"
+}
+
+// Enum pour les types de réduction
+enum DiscountType {
+  AMOUNT
+  PERCENTAGE
+}
+
+//Tables
+model User {
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email           String @unique @db.VarChar(255)
+  hashedPassword  String @map("hashed_password")
+  name            String? @db.VarChar(255)
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("users")
+}
+
+model Discount {
+  id                String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label             String       @db.VarChar(255)
+  discountType      DiscountType @default(PERCENTAGE) @map("discount_type")
+  value             Decimal      @db.Decimal(10, 2)
+  startDate         DateTime     @default(now()) @map("start_date") @db.Timestamptz
+  endDate           DateTime     @default(now()) @map("end_date") @db.Timestamptz
+
+  // Relations
+  categories    Category[]
+  subcategories Subcategory[]
+  services      Service[]
+
+  @@map("discounts")
+}
+
+model Category {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label       String   @db.VarChar(255)
+  image       String?  @db.Text
+  description String?  @db.Text
+  position    Int      @default(1)
+  slug        String   @db.VarChar(255) @unique
+
+  id_discount String?  @db.Uuid
+  discount    Discount? @relation(fields: [id_discount], references: [id], onDelete: SetNull)
+
+  subcategories Subcategory[]
+
+  @@map("categories")
+}
+
+model Subcategory {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label       String   @db.VarChar(255)
+  image       String?  @db.Text
+  description String?  @db.Text
+  position    Int      @default(1)
+
+  id_category String   @db.Uuid
+  category    Category @relation(fields: [id_category], references: [id], onDelete: Cascade)
+
+  id_discount String?  @db.Uuid
+  discount    Discount? @relation(fields: [id_discount], references: [id], onDelete: SetNull)
+
+  services Service[]
+
+  @@map("subcategories")
+}
+
+model Service {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String   @db.VarChar(255)
+  duration  Int
+  price     Decimal  @db.Decimal(10, 2)
+  details   String?  @db.Text
+  position  Int      @default(1)
+
+  id_subcategory String      @db.Uuid
+  subcategory    Subcategory @relation(fields: [id_subcategory], references: [id], onDelete: Cascade)
+
+  id_discount    String?     @db.Uuid
+  discount       Discount?   @relation(fields: [id_discount], references: [id], onDelete: SetNull)
+
+  @@map("service")
+}
