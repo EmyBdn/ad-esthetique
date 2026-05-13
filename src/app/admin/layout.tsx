@@ -1,4 +1,4 @@
-import AdminHeader from "@/app/components/admin/HeaderAdmin";
+import AdminHeader from "@/components/admin/HeaderAdmin";
 import React from "react";
 
 export default function AdminLayout({

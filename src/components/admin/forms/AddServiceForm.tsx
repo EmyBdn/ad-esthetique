@@ -1,9 +1,9 @@
 "use client";
 
-import { Modal } from "@/app/components/admin/Modal";
+import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { createService } from "@/app/actions/serviceActions";
+import { createService } from "@/actions/serviceActions";
 import { Subcategory } from "@prisma/client";
 
 type Props = {
@@ -22,7 +22,7 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
       }
 
       if (state.success === false) {
-        toast.error(state.error ?? "Impossible de créer le service.");
+        toast.error(state.error ?? "Impossible de créer le services.");
       }
     }
   }, [state]);

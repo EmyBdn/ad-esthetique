@@ -1,5 +1,5 @@
 import { prisma } from "../../../../lib/prisma";
-import Hero from "@/app/components/Hero";
+import Hero from "@/components/Hero";
 import { notFound } from "next/navigation";
 
 export default async function PrestationDetailsPage({
@@ -54,7 +54,7 @@ export default async function PrestationDetailsPage({
                 </h2>
                 <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
 
-                {/* Liste des service à l'intérieur de la carte */}
+                {/* Liste des services à l'intérieur de la carte */}
                 <div className="space-y-6">
                   {subcat.services.map((service) => (
                     <div key={service.id} className="group">
@@ -76,7 +76,7 @@ export default async function PrestationDetailsPage({
                         </span>
                       </div>
 
-                      {/* Ligne de séparation pointillée entre les service */}
+                      {/* Ligne de séparation pointillée entre les services */}
                       <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
                     </div>
                   ))}

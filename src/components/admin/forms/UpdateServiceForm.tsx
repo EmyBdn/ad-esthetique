@@ -1,10 +1,10 @@
 "use client";
 
-import { Modal } from "@/app/components/admin/Modal";
+import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Service } from "@prisma/client";
-import { updateService } from "@/app/actions/serviceActions";
+import { updateService } from "@/actions/serviceActions";
 
 type Props = {
   onClose: () => void;
@@ -21,7 +21,7 @@ export function UpdateServiceForm({ onClose, service }: Props) {
         onClose();
       }
       if (state.success === false) {
-        toast.error(state.error ?? "Impossible de mettre à jour le service");
+        toast.error(state.error ?? "Impossible de mettre à jour le services");
       }
     }
   }, [state]);

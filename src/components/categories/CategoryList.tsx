@@ -1,6 +1,6 @@
 "use client";
 
-import CategoryCard from "@/app/components/admin/category/CategoryCard";
+import CategoryCard from "@/components/categories/CategoryCard";
 import { Category } from "@prisma/client";
 
 type Props = {

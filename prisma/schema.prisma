@@ -91,5 +91,5 @@ model Service {
   id_discount    String?     @db.Uuid
   discount       Discount?   @relation(fields: [id_discount], references: [id], onDelete: SetNull)
 
-  @@map("service")
+  @@map("services")
 }

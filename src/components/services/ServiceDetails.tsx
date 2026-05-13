@@ -1,9 +1,9 @@
 import { Service } from "@prisma/client";
-import { deleteService } from "@/app/actions/serviceActions";
-import { DeleteIcon } from "@/app/components/admin/icons/DeleteIcon";
-import { EditIcon } from "@/app/components/admin/icons/EditIcon";
+import { deleteService } from "@/actions/serviceActions";
+import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
+import { EditIcon } from "@/components/admin/icons/EditIcon";
 import { useState } from "react";
-import { UpdateServiceForm } from "@/app/components/admin/form/service/UpdateServiceForm";
+import { UpdateServiceForm } from "@/components/admin/forms/UpdateServiceForm";
 export default function ServiceDetails({
   service,
 }: {
@@ -39,7 +39,7 @@ export default function ServiceDetails({
           </button>
         </div>
 
-        {/* Ligne de séparation pointillée entre les service */}
+        {/* Ligne de séparation pointillée entre les services */}
         <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
       </div>
 

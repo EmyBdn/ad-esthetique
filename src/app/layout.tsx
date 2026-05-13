@@ -1,11 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Footer from "@/app/components/Footer";
+import Footer from "@/components/Footer";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { ToastContainer } from "react-toastify/unstyled";
-import ToastProvider from "@/app/components/ToastProvider";
+import ToastProvider from "@/providers/ToastProvider";
 config.autoAddCss = false;
 
 export const metadata: Metadata = {

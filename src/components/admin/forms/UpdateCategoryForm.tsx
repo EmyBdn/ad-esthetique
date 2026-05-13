@@ -1,8 +1,8 @@
 "use client";
 
-import { Modal } from "@/app/components/admin/Modal";
+import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
-import { updateCategory } from "@/app/actions/categoryActions";
+import { updateCategory } from "@/actions/categoryActions";
 import { toast } from "react-toastify";
 import { Category } from "@prisma/client";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { Modal } from "@/app/components/admin/Modal";
+import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
-import { createCategory } from "@/app/actions/categoryActions";
+import { createCategory } from "@/actions/categoryActions";
 import { toast } from "react-toastify";
 
 type Props = {

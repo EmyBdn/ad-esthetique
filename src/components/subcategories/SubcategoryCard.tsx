@@ -1,19 +1,19 @@
 "use client";
 
 import { Subcategory, Service } from "@prisma/client";
-import { deleteSubCategory } from "@/app/actions/subcategoryActions";
-import ServiceDetails from "@/app/components/admin/service/serviceDetails";
-import { EditIcon } from "@/app/components/admin/icons/EditIcon";
+import { deleteSubCategory } from "@/actions/subcategoryActions";
+import ServiceDetails from "@/components/services/ServiceDetails";
+import { EditIcon } from "@/components/admin/icons/EditIcon";
 import { useState } from "react";
-import { UpdateSubCategoryForm } from "@/app/components/admin/form/subcategory/UpdateSubCategoryForm";
-import { AddServiceForm } from "@/app/components/admin/form/service/AddServiceForm";
-import { DeleteIcon } from "@/app/components/admin/icons/DeleteIcon";
+import { UpdateSubCategoryForm } from "@/components/admin/forms/UpdateSubCategoryForm";
+import { AddServiceForm } from "@/components/admin/forms/AddServiceForm";
+import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 
 type Props = {
   subcategory: Subcategory;
   services: Service[];
 };
-export default function SubCategoryCard({ subcategory, services }: Props) {
+export default function SubcategoryCard({ subcategory, services }: Props) {
   const [updateSubCategoryIsOpen, setUpdateSubCategoryIsOpen] = useState(false);
   const [addServiceIsOpen, setAddServiceIsOpen] = useState(false);
 
@@ -53,7 +53,7 @@ export default function SubCategoryCard({ subcategory, services }: Props) {
           </button>
           <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
 
-          {/* Liste des service à l'intérieur de la carte */}
+          {/* Liste des services à l'intérieur de la carte */}
           <div className="space-y-6">
             {services.map((service) => (
               <ServiceDetails key={service.id} service={service} />

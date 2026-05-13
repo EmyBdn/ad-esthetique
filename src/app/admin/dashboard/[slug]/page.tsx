@@ -1,7 +1,7 @@
 import { prisma } from "../../../../../lib/prisma";
 import { notFound } from "next/navigation";
-import SubCategoryCard from "@/app/components/admin/subcategory/subcategoryCard";
-import { AddSubCategoryButton } from "@/app/admin/dashboard/[slug]/AddSubCategoryButton";
+import SubcategoryCard from "@/components/subcategories/SubcategoryCard";
+import { AddSubCategoryButton } from "@/components/admin/AddSubCategoryButton";
 
 export default async function AdminSubcategoryPage({
   params,
@@ -31,7 +31,7 @@ export default async function AdminSubcategoryPage({
       <AddSubCategoryButton category={category} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {category.subcategories.map((subcategory) => (
-          <SubCategoryCard
+          <SubcategoryCard
             key={subcategory.id}
             subcategory={subcategory}
             services={subcategory.services}

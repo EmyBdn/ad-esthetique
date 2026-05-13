@@ -1,4 +1,4 @@
-import Hero from "@/app/components/Hero";
+import Hero from "@/components/Hero";
 import { prisma } from "../../../lib/prisma";
 import Link from "next/link";
 

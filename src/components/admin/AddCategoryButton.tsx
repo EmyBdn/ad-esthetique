@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AddCategoryForm } from "@/app/components/admin/form/category/AddCategoryForm";
+import { AddCategoryForm } from "@/components/admin/forms/AddCategoryForm";
 
 export function AddCategoryButton() {
   const [state, setState] = useState(false);

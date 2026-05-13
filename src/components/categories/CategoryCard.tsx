@@ -1,12 +1,12 @@
 "use client";
 
-import { deleteCategory } from "@/app/actions/categoryActions";
+import { deleteCategory } from "@/actions/categoryActions";
 import Link from "next/link";
 import { Category } from "@prisma/client";
 import { useState } from "react";
-import { UpdateCategoryForm } from "@/app/components/admin/form/category/UpdateCategoryForm";
-import { EditIcon } from "@/app/components/admin/icons/EditIcon";
-import { DeleteIcon } from "@/app/components/admin/icons/DeleteIcon";
+import { UpdateCategoryForm } from "@/components/admin/forms/UpdateCategoryForm";
+import { EditIcon } from "@/components/admin/icons/EditIcon";
+import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 export default function CategoryCard({ category }: { category: Category }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
