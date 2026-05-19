@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AddSubCategoryForm } from "@/components/admin/forms/AddSubCategoryForm";
 import { Category } from "@prisma/client";
+import { AddSubCategoryForm } from "@/components/admin/forms/AddSubCategoryForm";
 
 type Props = {
   category: Category;

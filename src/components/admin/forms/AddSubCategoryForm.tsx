@@ -25,7 +25,7 @@ export function AddSubCategoryForm({ onClose, category }: Props) {
         toast.error(state.error ?? "Impossible de créer la sous-catégorie.");
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
