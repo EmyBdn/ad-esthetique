@@ -102,7 +102,7 @@ export default function Header({
         ].join(" ")}
       >
         <div className="w-full flex items-center justify-between px-6 py-3">
-          <Link href="/public" className="font-semibold tracking-tight">
+          <Link href="/" className="font-semibold tracking-tight">
             AD Esthétique
           </Link>
 
