@@ -51,17 +51,24 @@ const contactSchema = z.object({
 });
 export async function sendContactEmail(previous: any, formData: FormData) {
   const rawData = {
-    nom: formData.get("nom"),
-    prenom: formData.get("prenom"),
-    email: formData.get("email"),
-    message: formData.get("message"),
-    website: formData.get("website"),
+    nom: formData.get("nom")?.toString() ?? "",
+    prenom: formData.get("prenom")?.toString() ?? "",
+    email: formData.get("email")?.toString() ?? "",
+    message: formData.get("message")?.toString() ?? "",
   };
 
-  if (rawData.website) {
+  const website = formData.get("website")?.toString() ?? "";
+
+  if (website) {
     return {
-      success: false,
+      success: true,
       errors: {},
+      values: {
+        nom: "",
+        prenom: "",
+        email: "",
+        message: "",
+      },
     };
   }
 
@@ -71,6 +78,7 @@ export async function sendContactEmail(previous: any, formData: FormData) {
     return {
       success: false,
       errors: z.flattenError(result.error).fieldErrors,
+      values: rawData,
     };
   }
 
@@ -112,6 +120,12 @@ export async function sendContactEmail(previous: any, formData: FormData) {
     return {
       success: true,
       errors: {},
+      values: {
+        nom: "",
+        prenom: "",
+        email: "",
+        message: "",
+      },
     };
   } catch (error) {
     console.error(error);
@@ -119,6 +133,7 @@ export async function sendContactEmail(previous: any, formData: FormData) {
     return {
       success: false,
       errors: {},
+      values: rawData,
     };
   }
 }

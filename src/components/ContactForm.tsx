@@ -11,11 +11,23 @@ type ContactFormState = {
     email?: string[];
     message?: string[];
   };
+  values: {
+    nom: string;
+    prenom: string;
+    email: string;
+    message: string;
+  };
 };
 
 const initialState: ContactFormState = {
   success: false,
   errors: {},
+  values: {
+    nom: "",
+    prenom: "",
+    email: "",
+    message: "",
+  },
 };
 
 export function ContactForm() {
@@ -38,6 +50,7 @@ export function ContactForm() {
         <input
           id="nom"
           name="nom"
+          defaultValue={state.values.nom}
           required
           placeholder="Votre nom"
           className={`border p-2 w-full ${
@@ -54,6 +67,7 @@ export function ContactForm() {
         <input
           id="prenom"
           name="prenom"
+          defaultValue={state.values.prenom}
           required
           placeholder="Votre prénom"
           className={`border p-2 w-full ${
@@ -71,6 +85,7 @@ export function ContactForm() {
         <input
           id="email"
           name="email"
+          defaultValue={state.values.email}
           required
           placeholder="email@exemple.com"
           className={`border p-2 w-full ${
@@ -87,6 +102,7 @@ export function ContactForm() {
         <textarea
           id="message"
           name="message"
+          defaultValue={state.values.message}
           required
           rows={5}
           placeholder="Votre message..."
