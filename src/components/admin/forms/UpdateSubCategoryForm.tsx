@@ -26,7 +26,7 @@ export function UpdateSubCategoryForm({ onClose, subcategory }: Props) {
         );
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
