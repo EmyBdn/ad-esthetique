@@ -3,8 +3,17 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import slugify from "slugify";
+import { requireAuth } from "@/../lib/auth";
 
 export async function deleteCategory(categoryId: string) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
   try {
     await prisma.category.delete({
       where: {
@@ -22,6 +31,15 @@ export async function deleteCategory(categoryId: string) {
 }
 
 export async function createCategory(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const label = formData.get("label") as string;
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
@@ -49,6 +67,15 @@ export async function createCategory(previous: any, formData: FormData) {
 }
 
 export async function updateCategory(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const categoryId = formData.get("categoryId") as string;
   const label = formData.get("label") as string;
   const image = formData.get("image") as string;

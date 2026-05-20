@@ -2,7 +2,17 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
+import { requireAuth } from "../../lib/auth";
 export async function deleteSubCategory(subcategoryId: string) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   try {
     await prisma.subcategory.delete({
       where: {
@@ -23,6 +33,15 @@ export async function deleteSubCategory(subcategoryId: string) {
 }
 
 export async function createSubCategory(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const label = formData.get("label") as string;
   const image = formData.get("image") as string;
   const description = formData.get("description") as string;
@@ -55,6 +74,15 @@ export async function createSubCategory(previous: any, formData: FormData) {
 }
 
 export async function updateSubCategory(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const subcategoryId = formData.get("subcategoryId") as string;
   const label = formData.get("label") as string;
   const image = formData.get("image") as string;

@@ -1,9 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "@/../lib/prisma";
+import { requireAuth } from "@/../lib/auth";
 
 export async function deleteService(serviceId: string) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   try {
     await prisma.service.delete({
       where: {
@@ -21,6 +31,15 @@ export async function deleteService(serviceId: string) {
 }
 
 export async function createService(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const label = formData.get("label") as string;
   const duration = parseInt(formData.get("duration") as string);
   const price = parseInt(formData.get("price") as string);
@@ -50,6 +69,14 @@ export async function createService(previous: any, formData: FormData) {
   }
 }
 export async function updateService(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
   const serviceId = formData.get("serviceId") as string;
   const label = formData.get("label") as string;
   const duration = parseInt(formData.get("duration") as string);
