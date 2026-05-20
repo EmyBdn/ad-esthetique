@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Hero from "@/app/components/Hero";
+import Hero from "@/components/Hero";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -45,36 +46,7 @@ export default function ContactPage() {
 
         <div>
           <h2>Formulaire de contact</h2>
-          <form>
-            <div>
-              <label htmlFor="nom">Nom</label>
-              <input id="nom" className="" placeholder="Votre nom" />
-            </div>
-
-            <div>
-              <label htmlFor="prénom">Prénom</label>
-              <input id="prénom" className="" placeholder="Votre prénom" />
-            </div>
-
-            <div>
-              <label htmlFor="email">Email</label>
-              <input id="email" className="" placeholder="email@exemple.com" />
-            </div>
-
-            <div>
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                className=""
-                rows={5}
-                placeholder="Votre message..."
-              />
-            </div>
-
-            <button type="button" className="">
-              Envoyer
-            </button>
-          </form>
+          <ContactForm />
         </div>
 
         <div></div>

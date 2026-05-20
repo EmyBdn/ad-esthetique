@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import Footer from "@/app/components/Footer";
+import type { Metadata } from "next";
+import Footer from "@/components/Footer";
+
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import ToastProvider from "@/providers/ToastProvider";
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: "Institut de beauté",
@@ -18,6 +23,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
         <main className="flex-1">{children}</main>
         <Footer />
+        <ToastProvider />
       </body>
     </html>
   );
