@@ -98,3 +98,26 @@ export async function updateCategory(previous: any, formData: FormData) {
     return { success: false, error: "Impossible de modifier la catégorie." };
   }
 }
+
+export async function updateCategoriesPosition(ids: string[]) {
+  try {
+    await prisma.$transaction(
+      ids.map((id, index) =>
+        prisma.category.update({
+          where: { id },
+          data: { position: index + 1 },
+        }),
+      ),
+    );
+
+    revalidatePath("/admin/dashboard");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Erreur lors de la réorganisation :", error);
+    return {
+      success: false,
+      error: "Impossible de réorganiser les catégories.",
+    };
+  }
+}

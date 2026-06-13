@@ -50,7 +50,12 @@ export async function createSubCategory(previous: any, formData: FormData) {
 
   try {
     const maxOrder = await prisma.subcategory.aggregate({
-      _max: { position: true },
+      where: {
+        id_category,
+      },
+      _max: {
+        position: true,
+      },
     });
 
     const newSubCategory = await prisma.subcategory.create({
@@ -109,6 +114,29 @@ export async function updateSubCategory(previous: any, formData: FormData) {
     return {
       success: false,
       error: "Impossible de modifier la sous-catégorie.",
+    };
+  }
+}
+
+export async function updateSubcategoriesPosition(ids: string[]) {
+  try {
+    await prisma.$transaction(
+      ids.map((id, index) =>
+        prisma.subcategory.update({
+          where: { id },
+          data: { position: index + 1 },
+        }),
+      ),
+    );
+
+    revalidatePath("/admin/dashboard/[slug]");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Erreur lors de la réorganisation :", error);
+    return {
+      success: false,
+      error: "Impossible de réorganiser les sous-catégories.",
     };
   }
 }
