@@ -25,7 +25,7 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
         toast.error(state.error ?? "Impossible de créer le services.");
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
