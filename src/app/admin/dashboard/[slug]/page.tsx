@@ -1,7 +1,7 @@
 import { prisma } from "../../../../../lib/prisma";
 import { notFound } from "next/navigation";
-import SubcategoryCard from "@/components/subcategories/SubcategoryCard";
 import { AddSubCategoryButton } from "@/components/admin/AddSubCategoryButton";
+import SubcategoryList from "@/components/subcategories/SubcategoryList";
 
 export default async function AdminSubcategoryPage({
   params,
@@ -29,19 +29,12 @@ export default async function AdminSubcategoryPage({
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <AddSubCategoryButton category={category} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {category.subcategories.map((subcategory) => (
-          <SubcategoryCard
-            key={subcategory.id}
-            subcategory={subcategory}
-            services={subcategory.services}
-          />
-        ))}
-      </div>
+
+      <SubcategoryList subcategories={category.subcategories} />
 
       {category.subcategories.length === 0 && (
         <p className="text-center text-gray-500 py-20">
-          Aucune prestation n'est disponible dans cette catégorie.
+          Aucune prestation n&apos;est disponible dans cette catégorie.
         </p>
       )}
     </main>
