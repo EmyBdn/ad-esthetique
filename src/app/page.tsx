@@ -42,7 +42,7 @@ export default function Home() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               {/* Bouton Principal : Rond, changement de couleur au survol */}
               <Link
-                href="/rendez-vous"
+                href="https://www.planity.com/ad-esthetique-37100-tours"
                 className="inline-flex items-center justify-center rounded-full bg-[#1A2F1A] px-8 py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#B7D8A8] hover:text-[#1A2F1A]"
               >
                 Prendre rendez-vous
