@@ -16,7 +16,6 @@ export default async function PrestationsPage() {
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => (
-            /* On déplace le Link ici pour qu'il enveloppe tout */
             <Link
               key={category.id}
               href={`/prestations/${category.slug}`}
