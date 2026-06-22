@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryCard from "@/components/categories/CategoryCard";
 import { Category } from "@prisma/client";
 import { DragDropProvider } from "@dnd-kit/react";
@@ -14,6 +14,10 @@ type Props = {
 
 export function CategoryList({ categories }: Props) {
   const [items, setItems] = useState(categories);
+
+  useEffect(() => {
+    setItems(categories);
+  }, [categories]);
 
   const handleOnDragEnd = (event: DragEndEvent) => {
     if (event.canceled) return;

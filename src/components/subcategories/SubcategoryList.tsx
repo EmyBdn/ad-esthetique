@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Subcategory, Service } from "@prisma/client";
 import { DragDropProvider } from "@dnd-kit/react";
 import { isSortable } from "@dnd-kit/react/sortable";
@@ -18,6 +18,10 @@ type Props = {
 
 export default function SubcategoryList({ subcategories }: Props) {
   const [items, setItems] = useState(subcategories);
+
+  useEffect(() => {
+    setItems(subcategories);
+  }, [subcategories]);
 
   const handleOnDragEnd = (event: DragEndEvent) => {
     if (event.canceled) return;
