@@ -56,12 +56,13 @@ export default function CategoryCard({
         href={`/admin/dashboard/${category.slug}`}
         className="block overflow-hidden rounded-xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
       >
-        <div className="aspect-video overflow-hidden bg-gray-100">
+        <div className="relative aspect-video overflow-hidden bg-gray-100">
           {category.image ? (
             <Image
               src={category.image}
               alt={category.label}
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           ) : (
             <div className="flex h-full items-center justify-center text-gray-400 text-xs italic">

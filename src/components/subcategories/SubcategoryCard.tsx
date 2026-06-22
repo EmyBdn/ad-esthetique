@@ -111,11 +111,12 @@ export default function SubcategoryCard({
       </div>
 
       {subcategory.image && (
-        <div className="h-48 w-full overflow-hidden">
+        <div className="relative aspect-video overflow-hidden">
           <Image
             src={subcategory.image}
             alt={subcategory.label}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
       )}
