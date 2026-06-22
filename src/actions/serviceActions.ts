@@ -48,6 +48,7 @@ export async function createService(previous: any, formData: FormData) {
 
   try {
     const maxOrder = await prisma.service.aggregate({
+      where: { id_subcategory },
       _max: { position: true },
     });
 
@@ -103,5 +104,34 @@ export async function updateService(previous: any, formData: FormData) {
   } catch (error) {
     console.error("Erreur lors de la mise à jour :", error);
     return { success: false, error: "Impossible de modifier la prestation." };
+  }
+}
+
+export async function updateServicesPosition(ids: string[]) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return { success: false, error: "UNAUTHORIZED" };
+  }
+
+  try {
+    await prisma.$transaction(
+      ids.map((id, index) =>
+        prisma.service.update({
+          where: { id },
+          data: { position: index + 1 },
+        }),
+      ),
+    );
+
+    revalidatePath("/admin/dashboard/[slug]", "page");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Erreur lors de la réorganisation :", error);
+    return {
+      success: false,
+      error: "Impossible de réorganiser les services.",
+    };
   }
 }
