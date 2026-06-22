@@ -39,6 +39,11 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
           placeholder="Description de la catégorie (optionelle)"
           defaultValue={category.description ?? ""}
         />
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp"
+        />
         <input type={"submit"} name="submit" />
       </form>
     </Modal>

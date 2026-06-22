@@ -41,6 +41,11 @@ export function UpdateSubCategoryForm({ onClose, subcategory }: Props) {
           placeholder="Description de la sous-catégorie (optionelle)"
           defaultValue={subcategory.description ?? ""}
         />
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp"
+        />
         <input hidden name="categoryId" value={subcategory.id_category} />
         <input hidden name="discountId" value={subcategory.id_discount ?? ""} />
         <input type={"submit"} name="submit" />

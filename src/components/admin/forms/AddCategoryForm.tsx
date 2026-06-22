@@ -32,6 +32,11 @@ export function AddCategoryForm({ onClose }: Props) {
           name="description"
           placeholder="Description de la catégorie (optionelle)"
         />
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp"
+        />
         <input type={"submit"} name="submit" />
       </form>
     </Modal>
