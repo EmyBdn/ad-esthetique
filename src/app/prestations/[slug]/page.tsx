@@ -2,6 +2,7 @@ import { prisma } from "../../../../lib/prisma";
 import Hero from "@/components/Hero";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function PrestationDetailsPage({
   params,
@@ -31,7 +32,11 @@ export default async function PrestationDetailsPage({
     <>
       <Hero title={category.label} imageSrc="/images/hero-salon.jpg" />
       <main className="mx-auto max-w-6xl px-6 py-12">
-        {/* Grille de cartes par sous-catégorie */}
+        <button>
+          <Link href="https://www.planity.com/ad-esthetique-37100-tours">
+            Réservez en ligne
+          </Link>
+        </button>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {category.subcategories.map((subcat) => (
             <div
@@ -63,9 +68,6 @@ export default async function PrestationDetailsPage({
                         <span className="font-medium text-gray-700 group-hover:text-pink-600 transition-colors">
                           {service.label}
                         </span>
-                        <button className="px-4 py-1.5 border border-amber-400 text-amber-600 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-amber-400 hover:text-white transition-all">
-                          Réserver
-                        </button>
                       </div>
 
                       <div className="flex items-center gap-3 text-sm">

@@ -14,7 +14,7 @@ export function AddSubCategoryButton({ category }: Props) {
     <>
       <button
         onClick={() => setState(true)}
-        className="absolute right-0 bg-slate-800 text-black px-6 py-3 rounded-full shadow-md hover:bg-slate-700 transition-all font-bold flex items-center gap-2"
+        className="absolute right-0 bg-slate-800 text-white px-6 py-3 rounded-full shadow-md hover:bg-slate-700 transition-all font-bold flex items-center gap-2"
       >
         <span className="text-xl">+</span> Ajouter une sous-catégorie
       </button>

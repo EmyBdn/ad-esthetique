@@ -28,7 +28,10 @@ export function AddCategoryForm({ onClose }: Props) {
     <Modal onClose={onClose}>
       <form action={action}>
         <input name="label" placeholder="Nom de la catégorie" />
-        <input name="description" placeholder="Description de la catégorie" />
+        <input
+          name="description"
+          placeholder="Description de la catégorie (optionelle)"
+        />
         <input type={"submit"} name="submit" />
       </form>
     </Modal>

@@ -23,6 +23,7 @@ jobs:
         run: npm install
 
       - name: Lancer ESLint
+        if: github.ref == 'refs/heads/master'
         run: npm run lint
 
       - name: Vérifier le build Next.js

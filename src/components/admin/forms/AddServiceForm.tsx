@@ -25,14 +25,14 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
         toast.error(state.error ?? "Impossible de créer le services.");
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
         <input name="label" placeholder="Nom du service" />
         <input
           name="duration"
-          placeholder="Durée de la prestation"
+          placeholder="Durée de la prestation (en minutes)"
           type="number"
           min="0"
         />

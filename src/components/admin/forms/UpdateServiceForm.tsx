@@ -5,10 +5,11 @@ import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Service } from "@prisma/client";
 import { updateService } from "@/actions/serviceActions";
+import { Decimal } from "@prisma/client-runtime-utils";
 
 type Props = {
   onClose: () => void;
-  service: Omit<Service, "price"> & { price: number };
+  service: Omit<Service, "price"> & { price: Decimal };
 };
 
 export function UpdateServiceForm({ onClose, service }: Props) {
@@ -36,19 +37,19 @@ export function UpdateServiceForm({ onClose, service }: Props) {
         />
         <input
           name="duration"
-          placeholder="Durée de la prestation"
+          placeholder="Durée de la prestation (en minutes)"
           defaultValue={service.duration}
           type="number"
         />
         <input
           name="price"
           placeholder="Prix de la prestation"
-          defaultValue={service.price}
-          type="number"
+          defaultValue={Number(service.price)}
+          type="decimal"
         />
         <input
           name="details"
-          placeholder="Détails de la prestation"
+          placeholder="Détails de la prestation (optionel)"
           defaultValue={service.details ?? ""}
         />
         <input hidden name="subcategoryId" value={service.id_subcategory} />

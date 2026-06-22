@@ -4,10 +4,11 @@ import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 import { EditIcon } from "@/components/admin/icons/EditIcon";
 import { useState } from "react";
 import { UpdateServiceForm } from "@/components/admin/forms/UpdateServiceForm";
+import { Decimal } from "@prisma/client-runtime-utils";
 export default function ServiceDetails({
   service,
 }: {
-  service: Omit<Service, "price"> & { price: number };
+  service: Omit<Service, "price"> & { price: Decimal };
 }) {
   const [updateServiceIsOpen, setUpdateServiceIsOpen] = useState(false);
 

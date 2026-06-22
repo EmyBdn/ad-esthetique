@@ -1,9 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { prisma } from "../../lib/prisma";
+import { prisma } from "@/../lib/prisma";
+import { requireAuth } from "@/../lib/auth";
 
 export async function deleteService(serviceId: string) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   try {
     await prisma.service.delete({
       where: {
@@ -21,14 +31,24 @@ export async function deleteService(serviceId: string) {
 }
 
 export async function createService(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
+
   const label = formData.get("label") as string;
   const duration = parseInt(formData.get("duration") as string);
   const price = parseInt(formData.get("price") as string);
-  const details = formData.get("description") as string;
+  const details = formData.get("details") as string;
   const id_subcategory = formData.get("subcategoryId") as string;
 
   try {
     const maxOrder = await prisma.service.aggregate({
+      where: { id_subcategory },
       _max: { position: true },
     });
 
@@ -50,6 +70,14 @@ export async function createService(previous: any, formData: FormData) {
   }
 }
 export async function updateService(previous: any, formData: FormData) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return {
+      success: false,
+      error: "UNAUTHORIZED",
+    };
+  }
   const serviceId = formData.get("serviceId") as string;
   const label = formData.get("label") as string;
   const duration = parseInt(formData.get("duration") as string);
@@ -76,5 +104,34 @@ export async function updateService(previous: any, formData: FormData) {
   } catch (error) {
     console.error("Erreur lors de la mise à jour :", error);
     return { success: false, error: "Impossible de modifier la prestation." };
+  }
+}
+
+export async function updateServicesPosition(ids: string[]) {
+  const session = await requireAuth();
+
+  if (!session) {
+    return { success: false, error: "UNAUTHORIZED" };
+  }
+
+  try {
+    await prisma.$transaction(
+      ids.map((id, index) =>
+        prisma.service.update({
+          where: { id },
+          data: { position: index + 1 },
+        }),
+      ),
+    );
+
+    revalidatePath("/admin/dashboard/[slug]", "page");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Erreur lors de la réorganisation :", error);
+    return {
+      success: false,
+      error: "Impossible de réorganiser les services.",
+    };
   }
 }
