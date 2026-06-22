@@ -4,22 +4,28 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import slugify from "slugify";
 import { requireAuth } from "@/../lib/auth";
+import { deleteImage, uploadImage } from "./imageActions";
 
 export async function deleteCategory(categoryId: string) {
   const session = await requireAuth();
 
   if (!session) {
-    return {
-      success: false,
-      error: "UNAUTHORIZED",
-    };
+    return { success: false, error: "UNAUTHORIZED" };
   }
+
   try {
-    await prisma.category.delete({
-      where: {
-        id: categoryId,
-      },
+    const category = await prisma.category.findUnique({
+      where: { id: categoryId },
+      select: { image: true },
     });
+
+    await prisma.category.delete({
+      where: { id: categoryId },
+    });
+
+    if (category?.image) {
+      await deleteImage(category.image);
+    }
 
     revalidatePath("/admin/dashboard/[slug]", "page");
 
@@ -42,9 +48,15 @@ export async function createCategory(previous: any, formData: FormData) {
 
   const label = formData.get("label") as string;
   const description = formData.get("description") as string;
-  const image = formData.get("image") as string;
+  const imageFile = formData.get("image") as File;
 
   try {
+    let imageUrl: string | null = null;
+
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadImage(imageFile, "categories");
+    }
+
     const maxOrder = await prisma.category.aggregate({
       _max: { position: true },
     });
@@ -52,7 +64,7 @@ export async function createCategory(previous: any, formData: FormData) {
     const newCategory = await prisma.category.create({
       data: {
         label: label,
-        image: image,
+        image: imageUrl,
         description: description,
         position: (maxOrder._max.position ?? 0) + 1,
         slug: slugify(label),
@@ -78,15 +90,32 @@ export async function updateCategory(previous: any, formData: FormData) {
 
   const categoryId = formData.get("categoryId") as string;
   const label = formData.get("label") as string;
-  const image = formData.get("image") as string;
+  const imageFile = formData.get("image") as File;
   const description = formData.get("description") as string;
 
   try {
+    const currentCategory = await prisma.category.findUnique({
+      where: { id: categoryId },
+      select: { image: true },
+    });
+
+    let imageUrl = currentCategory?.image ?? null;
+
+    if (imageFile && imageFile.size > 0) {
+      const newImageUrl = await uploadImage(imageFile, "categories");
+
+      if (currentCategory?.image) {
+        await deleteImage(currentCategory.image);
+      }
+
+      imageUrl = newImageUrl;
+    }
+
     const newCategory = await prisma.category.update({
       where: { id: categoryId },
       data: {
         label: label,
-        image: image || null,
+        image: imageUrl || null,
         description: description || null,
         slug: slugify(label),
       },

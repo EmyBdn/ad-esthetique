@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import { requireAuth } from "../../lib/auth";
+import { uploadImage } from "@/actions/imageActions";
 export async function deleteSubCategory(subcategoryId: string) {
   const session = await requireAuth();
 
@@ -43,12 +44,20 @@ export async function createSubCategory(previous: any, formData: FormData) {
   }
 
   const label = formData.get("label") as string;
-  const image = formData.get("image") as string;
+  const imageFile = formData.get("image") as File;
   const description = formData.get("description") as string;
   const id_category = formData.get("categoryId") as string;
   const id_discount = formData.get("discountId") as string;
 
   try {
+    const imageFile = formData.get("image") as File;
+
+    let imageUrl: string | null = null;
+
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadImage(imageFile, "subcategories");
+    }
+
     const maxOrder = await prisma.subcategory.aggregate({
       where: {
         id_category,
@@ -61,7 +70,7 @@ export async function createSubCategory(previous: any, formData: FormData) {
     const newSubCategory = await prisma.subcategory.create({
       data: {
         label: label,
-        image: image,
+        image: imageUrl,
         description: description,
         position: (maxOrder._max.position ?? 0) + 1,
         id_category: id_category,
@@ -90,17 +99,28 @@ export async function updateSubCategory(previous: any, formData: FormData) {
 
   const subcategoryId = formData.get("subcategoryId") as string;
   const label = formData.get("label") as string;
-  const image = formData.get("image") as string;
+  const imageFile = formData.get("image") as File;
   const description = formData.get("description") as string;
   const id_category = formData.get("categoryId") as string;
   const id_discount = formData.get("discountId") as string;
 
   try {
+    const currentSubCategory = await prisma.subcategory.findUnique({
+      where: { id: subcategoryId },
+      select: { image: true },
+    });
+
+    let imageUrl = currentSubCategory?.image ?? null;
+
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadImage(imageFile, "subcategories");
+    }
+
     const newSubCategory = await prisma.subcategory.update({
       where: { id: subcategoryId },
       data: {
         label: label,
-        image: image || null,
+        image: imageUrl || null,
         description: description || null,
         id_category: id_category,
         id_discount: id_discount || null,
