@@ -73,12 +73,7 @@ export default function CategoryCard({
           <h3 className="font-semibold text-xl text-gray-800 group-hover:text-pink-600 transition-colors">
             {category.label}
           </h3>
-          <p className="text-sm text-gray-500 mt-2 flex items-center gap-1">
-            Gérer le contenu
-            <span className="group-hover:translate-x-1 transition-transform">
-              →
-            </span>
-          </p>
+          <p>{category.description}</p>
         </div>
       </Link>
       {modalIsOpen && (

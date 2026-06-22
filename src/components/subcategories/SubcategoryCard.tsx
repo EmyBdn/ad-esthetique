@@ -79,6 +79,8 @@ export default function SubcategoryCard({
           {subcategory.label}
         </h2>
 
+        <p>{subcategory.description}</p>
+
         <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
 
         <div className="space-y-6">
