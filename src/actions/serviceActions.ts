@@ -43,7 +43,7 @@ export async function createService(previous: any, formData: FormData) {
   const label = formData.get("label") as string;
   const duration = parseInt(formData.get("duration") as string);
   const price = parseInt(formData.get("price") as string);
-  const details = formData.get("description") as string;
+  const details = formData.get("details") as string;
   const id_subcategory = formData.get("subcategoryId") as string;
 
   try {
