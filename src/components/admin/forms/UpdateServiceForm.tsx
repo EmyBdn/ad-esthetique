@@ -37,7 +37,7 @@ export function UpdateServiceForm({ onClose, service }: Props) {
         />
         <input
           name="duration"
-          placeholder="Durée de la prestation"
+          placeholder="Durée de la prestation (en minutes)"
           defaultValue={service.duration}
           type="number"
         />
@@ -49,7 +49,7 @@ export function UpdateServiceForm({ onClose, service }: Props) {
         />
         <input
           name="details"
-          placeholder="Détails de la prestation"
+          placeholder="Détails de la prestation (optionel)"
           defaultValue={service.details ?? ""}
         />
         <input hidden name="subcategoryId" value={service.id_subcategory} />

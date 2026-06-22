@@ -36,7 +36,7 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
         />
         <input
           name="description"
-          placeholder="Description de la catégorie"
+          placeholder="Description de la catégorie (optionelle)"
           defaultValue={category.description ?? ""}
         />
         <input type={"submit"} name="submit" />

@@ -32,7 +32,7 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
         <input name="label" placeholder="Nom du service" />
         <input
           name="duration"
-          placeholder="Durée de la prestation"
+          placeholder="Durée de la prestation (en minutes)"
           type="number"
           min="0"
         />

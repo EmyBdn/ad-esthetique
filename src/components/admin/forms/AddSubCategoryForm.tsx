@@ -32,7 +32,7 @@ export function AddSubCategoryForm({ onClose, category }: Props) {
         <input name="label" placeholder="Nom de la sous-catégorie" />
         <input
           name="description"
-          placeholder="Description de la sous-catégorie"
+          placeholder="Description de la sous-catégorie (optionelle)"
         />
         <input hidden value={category.id} name="categoryId" />
         <input type={"submit"} name="submit" />

@@ -38,7 +38,7 @@ export function UpdateSubCategoryForm({ onClose, subcategory }: Props) {
         />
         <input
           name="description"
-          placeholder="Description de la sous-catégorie"
+          placeholder="Description de la sous-catégorie (optionelle)"
           defaultValue={subcategory.description ?? ""}
         />
         <input hidden name="categoryId" value={subcategory.id_category} />
