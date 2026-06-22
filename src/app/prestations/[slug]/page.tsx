@@ -68,9 +68,6 @@ export default async function PrestationDetailsPage({
                         <span className="font-medium text-gray-700 group-hover:text-pink-600 transition-colors">
                           {service.label}
                         </span>
-                        <button className="px-4 py-1.5 border border-amber-400 text-amber-600 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-amber-400 hover:text-white transition-all">
-                          Réserver
-                        </button>
                       </div>
 
                       <div className="flex items-center gap-3 text-sm">
