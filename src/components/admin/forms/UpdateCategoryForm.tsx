@@ -24,11 +24,11 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
         toast.error(state.error ?? "Impossible de mettre à jour la catégorie.");
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
-        <input name="categoryId" hidden value={category.id} />
+        <input name="categoryId" hidden defaultValue={category.id} />
         <input
           name="label"
           placeholder="Nom de la catégorie"
