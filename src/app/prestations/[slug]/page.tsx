@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { applyDiscount, isDiscountActive } from "@/utils/discounts";
 
 export default async function PrestationDetailsPage({
   params,
@@ -12,15 +13,26 @@ export default async function PrestationDetailsPage({
   const { slug } = await params;
 
   const category = await prisma.category.findUnique({
-    where: { slug: slug },
+    where: { slug },
     include: {
+      discount: true,
+
       subcategories: {
         include: {
+          discount: true,
+
           services: {
-            orderBy: { position: "asc" },
+            include: {
+              discount: true,
+            },
+            orderBy: {
+              position: "asc",
+            },
           },
         },
-        orderBy: { position: "asc" },
+        orderBy: {
+          position: "asc",
+        },
       },
     },
   });
@@ -32,6 +44,12 @@ export default async function PrestationDetailsPage({
     <>
       <Hero title={category.label} imageSrc="/images/hero-salon.jpg" />
       <main className="mx-auto max-w-6xl px-6 py-12">
+        <Link
+          href="/prestations"
+          className="inline-flex items-center gap-2 mb-8 text-gray-600 hover:text-pink-600 transition-colors"
+        >
+          ← Retour aux prestations
+        </Link>
         <button>
           <Link href="https://www.planity.com/ad-esthetique-37100-tours">
             Réservez en ligne
@@ -59,30 +77,62 @@ export default async function PrestationDetailsPage({
                   {subcat.label}
                 </h2>
                 <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
-
-                {/* Liste des services à l'intérieur de la carte */}
                 <div className="space-y-6">
-                  {subcat.services.map((service) => (
-                    <div key={service.id} className="group">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-gray-700 group-hover:text-pink-600 transition-colors">
-                          {service.label}
-                        </span>
-                      </div>
+                  {subcat.services.map((service) => {
+                    const originalPrice = Number(service.price);
 
-                      <div className="flex items-center gap-3 text-sm">
-                        <span className="text-gray-400">
-                          {service.duration}mn
-                        </span>
-                        <span className="font-bold text-gray-600">
-                          {Number(service.price)}€
-                        </span>
-                      </div>
+                    const activeDiscount =
+                      service.discount ?? subcat.discount ?? category.discount;
 
-                      {/* Ligne de séparation pointillée entre les services */}
-                      <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
-                    </div>
-                  ))}
+                    const hasActiveDiscount =
+                      activeDiscount &&
+                      isDiscountActive(
+                        activeDiscount.startDate,
+                        activeDiscount.endDate,
+                      );
+
+                    const discountedPrice = hasActiveDiscount
+                      ? applyDiscount(
+                          originalPrice,
+                          activeDiscount.discountType,
+                          Number(activeDiscount.value),
+                        )
+                      : originalPrice;
+
+                    return (
+                      <div key={service.id} className="group">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-gray-700 group-hover:text-pink-600 transition-colors">
+                            {service.label}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-3 text-sm">
+                          <span className="text-gray-400">
+                            {service.duration}mn
+                          </span>
+
+                          {hasActiveDiscount ? (
+                            <>
+                              <span className="text-gray-400 line-through">
+                                {originalPrice}€
+                              </span>
+
+                              <span className="font-bold text-pink-600">
+                                {discountedPrice}€
+                              </span>
+                            </>
+                          ) : (
+                            <span className="font-bold text-gray-600">
+                              {originalPrice}€
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

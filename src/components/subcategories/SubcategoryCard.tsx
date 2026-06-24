@@ -1,6 +1,6 @@
 "use client";
 
-import { Subcategory, Service } from "@prisma/client";
+import { Subcategory, Service, Discount } from "@prisma/client";
 import { deleteSubCategory } from "@/actions/subcategoryActions";
 import { updateServicesPosition } from "@/actions/serviceActions";
 import ServiceDetails from "@/components/services/ServiceDetails";
@@ -13,15 +13,23 @@ import DragIcon from "@/components/admin/icons/DragIcon";
 import Image from "next/image";
 import { useSortable } from "@dnd-kit/react/sortable";
 
+type ServiceWithDiscount = Service & {
+  discount: Discount | null;
+};
+
 type Props = {
-  subcategory: Subcategory;
-  services: Service[];
+  subcategory: Subcategory & {
+    discount: Discount | null;
+  };
+  services: ServiceWithDiscount[];
+  categoryDiscount: Discount | null;
   index: number;
 };
 
 export default function SubcategoryCard({
   subcategory,
   services,
+  categoryDiscount,
   index,
 }: Props) {
   const [updateSubCategoryIsOpen, setUpdateSubCategoryIsOpen] = useState(false);
@@ -148,7 +156,11 @@ export default function SubcategoryCard({
                     : "ring-1 ring-transparent"
                 }`}
               >
-                <ServiceDetails service={service} />
+                <ServiceDetails
+                  service={service}
+                  categoryDiscount={categoryDiscount}
+                  subcategoryDiscount={subcategory.discount}
+                />
 
                 {isSelected && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2">

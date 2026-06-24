@@ -13,9 +13,14 @@ export default async function AdminSubcategoryPage({
   const category = await prisma.category.findUnique({
     where: { slug },
     include: {
+      discount: true,
       subcategories: {
         include: {
+          discount: true,
           services: {
+            include: {
+              discount: true,
+            },
             orderBy: { position: "asc" },
           },
         },
@@ -30,7 +35,10 @@ export default async function AdminSubcategoryPage({
     <main className="mx-auto max-w-6xl px-6 py-12">
       <AddSubCategoryButton category={category} />
 
-      <SubcategoryList subcategories={category.subcategories} />
+      <SubcategoryList
+        subcategories={category.subcategories}
+        categoryDiscount={category.discount}
+      />
 
       {category.subcategories.length === 0 && (
         <p className="text-center text-gray-500 py-20">
