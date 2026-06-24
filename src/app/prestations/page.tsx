@@ -21,13 +21,13 @@ export default async function PrestationsPage() {
               href={`/prestations/${category.slug}`}
               className="group block overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl border border-gray-100 hover:-translate-y-1"
             >
-              {/* Image de la catégorie */}
-              <div className="aspect-video w-full overflow-hidden bg-gray-200">
+              <div className="relative aspect-video w-full overflow-hidden bg-gray-200">
                 {category.image ? (
                   <Image
                     src={category.image}
                     alt={category.label}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    className="object-cover"
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center text-gray-400">
