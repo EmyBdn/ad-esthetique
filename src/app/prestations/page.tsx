@@ -43,7 +43,7 @@ export default async function PrestationsPage() {
                 </h3>
 
                 {category.description && (
-                  <p className="mb-4 text-sm text-gray-600 line-clamp-2">
+                  <p className="text-sm text-gray-600">
                     {category.description}
                   </p>
                 )}

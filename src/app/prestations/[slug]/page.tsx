@@ -44,39 +44,45 @@ export default async function PrestationDetailsPage({
     <>
       <Hero title={category.label} imageSrc="/images/hero-salon.jpg" />
       <main className="mx-auto max-w-6xl px-6 py-12">
-        <Link
-          href="/prestations"
-          className="inline-flex items-center gap-2 mb-8 text-gray-600 hover:text-pink-600 transition-colors"
-        >
-          ← Retour aux prestations
-        </Link>
-        <button>
-          <Link href="https://www.planity.com/ad-esthetique-37100-tours">
-            Réservez en ligne
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href="/prestations"
+            className="inline-flex items-center text-sm font-medium text-[#1A2F1A]/70 transition hover:text-[#1A2F1A]"
+          >
+            ← Retour aux prestations
           </Link>
-        </button>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+          <Link
+            href="https://www.planity.com/ad-esthetique-37100-tours"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full bg-[#1A2F1A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A]"
+          >
+            Réserver en ligne
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
           {category.subcategories.map((subcat) => (
             <div
               key={subcat.id}
-              className="flex flex-col bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden"
+              className="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md"
             >
-              {/* Header de la carte (Image + Titre) */}
               {subcat.image && (
-                <div className="h-48 w-full overflow-hidden">
+                <div className="relative h-48 w-full overflow-hidden">
                   <Image
+                    fill
                     src={subcat.image}
                     alt={subcat.label}
-                    className="w-full h-full object-cover"
+                    className="object-cover"
                   />
                 </div>
               )}
 
               <div className="p-8">
-                <h2 className="text-2xl font-serif text-center text-slate-700 mb-2">
+                <h2 className="text-xl font-semibold text-center text-slate-700 mb-2">
                   {subcat.label}
                 </h2>
-                <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
+                <div className="w-16 h-0.5 bg-green-300 mx-auto mb-8"></div>
                 <div className="space-y-6">
                   {subcat.services.map((service) => {
                     const originalPrice = Number(service.price);
@@ -100,36 +106,37 @@ export default async function PrestationDetailsPage({
                       : originalPrice;
 
                     return (
-                      <div key={service.id} className="group">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-gray-700 group-hover:text-pink-600 transition-colors">
-                            {service.label}
-                          </span>
-                        </div>
+                      <div
+                        key={service.id}
+                        className="border-b border-[#1A2F1A]/10 pb-5 last:border-0 last:pb-0"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h3 className="font-medium text-[#1A2F1A]">
+                              {service.label}
+                            </h3>
+                            <p className="mt-1 text-sm text-[#1A2F1A]/55">
+                              {service.duration} min
+                            </p>
+                          </div>
 
-                        <div className="flex items-center gap-3 text-sm">
-                          <span className="text-gray-400">
-                            {service.duration}mn
-                          </span>
-
-                          {hasActiveDiscount ? (
-                            <>
-                              <span className="text-gray-400 line-through">
+                          <div className="shrink-0 text-right">
+                            {hasActiveDiscount ? (
+                              <>
+                                <p className="text-sm text-[#1A2F1A]/40 line-through">
+                                  {originalPrice}€
+                                </p>
+                                <p className="font-semibold text-pink-600">
+                                  {discountedPrice}€
+                                </p>
+                              </>
+                            ) : (
+                              <p className="font-semibold text-[#1A2F1A]">
                                 {originalPrice}€
-                              </span>
-
-                              <span className="font-bold text-pink-600">
-                                {discountedPrice}€
-                              </span>
-                            </>
-                          ) : (
-                            <span className="font-bold text-gray-600">
-                              {originalPrice}€
-                            </span>
-                          )}
+                              </p>
+                            )}
+                          </div>
                         </div>
-
-                        <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
                       </div>
                     );
                   })}

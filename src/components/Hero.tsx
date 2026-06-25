@@ -22,7 +22,7 @@ export default function Hero({ title, imageSrc, subtitle }: HeroProps) {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 flex h-full items-center justify-center">
-          <h1 className="text-white text-4xl sm:text-5xl font-semibold tracking-tight">
+          <h1 className="font-serif italic text-4xl text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>
         </div>
