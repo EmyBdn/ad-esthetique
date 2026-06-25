@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import { requireAuth } from "../../lib/auth";
-import { uploadImage } from "@/actions/imageActions";
+import { uploadImage, deleteImage } from "@/actions/imageActions";
 export async function deleteSubCategory(subcategoryId: string) {
   const session = await requireAuth();
 
@@ -15,11 +15,18 @@ export async function deleteSubCategory(subcategoryId: string) {
   }
 
   try {
-    await prisma.subcategory.delete({
-      where: {
-        id: subcategoryId,
-      },
+    const subcategory = await prisma.subcategory.findUnique({
+      where: { id: subcategoryId },
+      select: { image: true },
     });
+
+    await prisma.subcategory.delete({
+      where: { id: subcategoryId },
+    });
+
+    if (subcategory?.image) {
+      await deleteImage(subcategory.image);
+    }
 
     revalidatePath("/admin/dashboard/[slug]", "page");
 
@@ -50,8 +57,6 @@ export async function createSubCategory(previous: any, formData: FormData) {
   const id_discount = formData.get("discountId") as string;
 
   try {
-    const imageFile = formData.get("image") as File;
-
     let imageUrl: string | null = null;
 
     if (imageFile && imageFile.size > 0) {
@@ -113,7 +118,13 @@ export async function updateSubCategory(previous: any, formData: FormData) {
     let imageUrl = currentSubCategory?.image ?? null;
 
     if (imageFile && imageFile.size > 0) {
-      imageUrl = await uploadImage(imageFile, "subcategories");
+      const newImageUrl = await uploadImage(imageFile, "subcategories");
+
+      if (currentSubCategory?.image) {
+        await deleteImage(currentSubCategory.image);
+      }
+
+      imageUrl = newImageUrl;
     }
 
     const newSubCategory = await prisma.subcategory.update({
