@@ -1,6 +1,10 @@
 "use client";
 
-import { Subcategory, Service, Discount } from "@prisma/client";
+import {
+  Subcategory,
+  Service,
+  Discount,
+} from "@/../prisma/generated/prisma/client";
 import { deleteSubCategory } from "@/actions/subcategoryActions";
 import { updateServicesPosition } from "@/actions/serviceActions";
 import ServiceDetails from "@/components/services/ServiceDetails";

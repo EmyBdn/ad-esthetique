@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Subcategory, Service, Discount } from "@prisma/client";
+import {
+  Subcategory,
+  Service,
+  Discount,
+} from "@/../prisma/generated/prisma/client";
 import { DragDropProvider } from "@dnd-kit/react";
 import { isSortable } from "@dnd-kit/react/sortable";
 import SubcategoryCard from "@/components/subcategories/SubcategoryCard";
