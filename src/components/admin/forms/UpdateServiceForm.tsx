@@ -3,13 +3,13 @@
 import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Service } from "@prisma/client";
+import { Service } from "@/../prisma/generated/prisma/client";
 import { updateService } from "@/actions/serviceActions";
 import { Decimal } from "@prisma/client-runtime-utils";
 
 type Props = {
   onClose: () => void;
-  service: Omit<Service, "price"> & { price: Decimal };
+  service: Omit<Service, "price"> & { price: Decimal | null };
 };
 
 export function UpdateServiceForm({ onClose, service }: Props) {
@@ -38,7 +38,7 @@ export function UpdateServiceForm({ onClose, service }: Props) {
         <input
           name="duration"
           placeholder="Durée de la prestation (en minutes)"
-          defaultValue={service.duration}
+          defaultValue={service.duration || ""}
           type="number"
         />
         <input

@@ -1,4 +1,4 @@
-import { Service, Discount } from "@prisma/client";
+import { Service, Discount } from "@/../prisma/generated/prisma/client";
 import { deleteService } from "@/actions/serviceActions";
 import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 import { EditIcon } from "@/components/admin/icons/EditIcon";
@@ -13,7 +13,7 @@ export default function ServiceDetails({
   categoryDiscount,
 }: {
   service: Omit<Service, "price"> & {
-    price: Decimal;
+    price: Decimal | null;
     discount: Discount | null;
   };
   subcategoryDiscount: Discount | null;
@@ -60,6 +60,7 @@ export default function ServiceDetails({
           ) : (
             <span className="font-bold text-gray-600">{originalPrice}€</span>
           )}
+          <span>{service.details}</span>
           <button
             onClick={() => setUpdateServiceIsOpen(true)}
             title="Modifier le service"

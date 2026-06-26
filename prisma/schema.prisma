@@ -80,8 +80,8 @@ model Subcategory {
 model Service {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   label     String   @db.VarChar(255)
-  duration  Int
-  price     Decimal  @db.Decimal(10, 2)
+  duration  Int?
+  price     Decimal?  @db.Decimal(10, 2)
   details   String?  @db.Text
   position  Int      @default(1)
 
