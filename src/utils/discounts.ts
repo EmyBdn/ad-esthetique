@@ -1,4 +1,4 @@
-import { DiscountType } from "@/../prisma/generated/prisma";
+import { DiscountType } from "@/../prisma/generated/prisma/client";
 
 export function applyDiscount(
   price: number,

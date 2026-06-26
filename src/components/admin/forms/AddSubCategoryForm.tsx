@@ -4,7 +4,7 @@ import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { createSubCategory } from "@/actions/subcategoryActions";
-import { Category } from "@prisma/client";
+import { Category } from "@/../prisma/generated/prisma/client";
 
 type Props = {
   onClose: () => void;

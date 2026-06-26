@@ -2,7 +2,7 @@
 
 import { deleteCategory } from "@/actions/categoryActions";
 import Link from "next/link";
-import { Category } from "@prisma/client";
+import { Category } from "@/../prisma/generated/prisma/client";
 import { useState } from "react";
 import { UpdateCategoryForm } from "@/components/admin/forms/UpdateCategoryForm";
 import { EditIcon } from "@/components/admin/icons/EditIcon";

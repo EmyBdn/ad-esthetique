@@ -3,7 +3,7 @@
 import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Subcategory } from "@prisma/client";
+import { Subcategory } from "@/../prisma/generated/prisma/client";
 import { updateSubCategory } from "@/actions/subcategoryActions";
 
 type Props = {

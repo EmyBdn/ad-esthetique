@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CategoryCard from "@/components/categories/CategoryCard";
-import { Category } from "@prisma/client";
+import { Category } from "@/../prisma/generated/prisma/client";
 import { DragDropProvider } from "@dnd-kit/react";
 import { isSortable } from "@dnd-kit/react/sortable";
 import { updateCategoriesPosition } from "@/actions/categoryActions";

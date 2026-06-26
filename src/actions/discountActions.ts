@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../lib/prisma";
 import { requireAuth } from "@/../lib/auth";
-import { DiscountType } from "@/../prisma/generated/prisma";
+import { DiscountType } from "@/../prisma/generated/prisma/client";
 
 export async function createDiscount(previous: any, formData: FormData) {
   const session = await requireAuth();
