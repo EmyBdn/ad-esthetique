@@ -16,7 +16,7 @@ export default function GiftCardPage() {
 
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:py-20">
         <section className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-100 shadow-sm">
             <Image
               src="/images/carte-cadeau.jpg"
               alt="Carte cadeau AD Esthétique"
@@ -41,8 +41,8 @@ export default function GiftCardPage() {
             </p>
 
             <ul className="mt-6 space-y-3 text-[#1A2F1A]/80">
-              <li>Valable 6 mois</li>
-              <li>Message personnalisé</li>
+              <li>- Valable 6 mois</li>
+              <li>- Message personnalisé</li>
             </ul>
 
             <div className="mt-8 rounded-2xl bg-[#FAF8F4] p-5">
