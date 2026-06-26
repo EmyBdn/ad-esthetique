@@ -67,7 +67,7 @@ export async function createCategory(previous: any, formData: FormData) {
         image: imageUrl,
         description: description,
         position: (maxOrder._max.position ?? 0) + 1,
-        slug: slugify(label),
+        slug: slugify(label, { lower: true }),
       },
     });
     revalidatePath("/admin/dashboard", "page");
@@ -117,7 +117,7 @@ export async function updateCategory(previous: any, formData: FormData) {
         label: label,
         image: imageUrl || null,
         description: description || null,
-        slug: slugify(label),
+        slug: slugify(label, { lower: true }),
       },
     });
     revalidatePath("/admin/dashboard", "page");
