@@ -1,4 +1,5 @@
 import LogoutButton from "@/components/LogOutButton";
+import Link from "next/link";
 
 export default function AdminHeader() {
   return (
@@ -6,7 +7,11 @@ export default function AdminHeader() {
       <h1 className="text-xl font-bold text-slate-800">
         Panneau d'administration
       </h1>
-      <LogoutButton />
+      <div className="flex items-center justify-end gap-4">
+        <Link href="/admin/dashboard">Prestations</Link>
+        <Link href="/admin/dashboard/discounts">Promotions</Link>
+        <LogoutButton />
+      </div>
     </header>
   );
 }

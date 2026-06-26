@@ -24,11 +24,11 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
         toast.error(state.error ?? "Impossible de mettre à jour la catégorie.");
       }
     }
-  }, [state, onClose()]);
+  }, [state, onClose]);
   return (
     <Modal onClose={onClose}>
       <form action={action}>
-        <input name="categoryId" hidden value={category.id} />
+        <input name="categoryId" hidden defaultValue={category.id} />
         <input
           name="label"
           placeholder="Nom de la catégorie"
@@ -38,6 +38,11 @@ export function UpdateCategoryForm({ onClose, category }: Props) {
           name="description"
           placeholder="Description de la catégorie (optionelle)"
           defaultValue={category.description ?? ""}
+        />
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp"
         />
         <input type={"submit"} name="submit" />
       </form>

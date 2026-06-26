@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const navigationLinks = [
   { href: "/", label: "Accueil" },
@@ -102,8 +103,19 @@ export default function Header({
         ].join(" ")}
       >
         <div className="w-full flex items-center justify-between px-6 py-3">
-          <Link href="/" className="font-semibold tracking-tight">
-            AD Esthétique
+          <Link
+            href="/"
+            className="flex items-center gap-3 font-semibold tracking-tight"
+          >
+            <Image
+              src="/images/logo.jpg"
+              alt="Logo AD Esthétique"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
+            />
+
+            <span>AD Esthétique</span>
           </Link>
 
           {/* Desktop navigation */}

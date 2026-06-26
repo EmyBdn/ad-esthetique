@@ -1,22 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Subcategory, Service } from "@prisma/client";
+import {
+  Subcategory,
+  Service,
+  Discount,
+} from "@/../prisma/generated/prisma/client";
 import { DragDropProvider } from "@dnd-kit/react";
 import { isSortable } from "@dnd-kit/react/sortable";
 import SubcategoryCard from "@/components/subcategories/SubcategoryCard";
 import { updateSubcategoriesPosition } from "@/actions/subcategoryActions";
 import { DragEndEvent } from "@/types";
 
+type ServiceWithDiscount = Service & {
+  discount: Discount | null;
+};
+
 type SubcategoryWithServices = Subcategory & {
-  services: Service[];
+  discount: Discount | null;
+  services: ServiceWithDiscount[];
 };
 
 type Props = {
   subcategories: SubcategoryWithServices[];
+  categoryDiscount: Discount | null;
 };
 
-export default function SubcategoryList({ subcategories }: Props) {
+export default function SubcategoryList({
+  subcategories,
+  categoryDiscount,
+}: Props) {
   const [items, setItems] = useState(subcategories);
 
   useEffect(() => {
@@ -51,6 +64,7 @@ export default function SubcategoryList({ subcategories }: Props) {
             subcategory={subcategory}
             services={subcategory.services}
             index={index}
+            categoryDiscount={categoryDiscount}
           />
         ))}
       </div>

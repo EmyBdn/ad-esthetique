@@ -34,6 +34,11 @@ export function AddSubCategoryForm({ onClose, category }: Props) {
           name="description"
           placeholder="Description de la sous-catégorie (optionelle)"
         />
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp"
+        />
         <input hidden value={category.id} name="categoryId" />
         <input type={"submit"} name="submit" />
       </form>

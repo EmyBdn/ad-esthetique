@@ -19,9 +19,8 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#B7D8A8] text-[#1A2F1A]">
+    <footer className="bg-[#B7D8A8] text-[#1A2F1A] mt-6">
       <div className="mx-auto max-w-5xl px-6 py-10 flex flex-col gap-12">
-        {/* En-tête : Nom + Réseaux (Toujours centré) */}
         <div className="mx-auto flex flex-col gap-4 text-center">
           <h3 className="text-3xl font-serif italic">AD Esthétique</h3>
           <hr className="mx-auto w-24 border-[#1A2F1A]/20" />
@@ -62,7 +61,6 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Grille : Colonnes empilées sur mobile, grille sur desktop */}
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 items-start">
           {/* Coordonnées */}
           <div className="flex flex-col gap-4 max-w-xs mx-auto w-full sm:mx-0 sm:max-w-none">

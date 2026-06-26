@@ -1,16 +1,42 @@
-import { Service } from "@prisma/client";
+import { Service, Discount } from "@/../prisma/generated/prisma/client";
 import { deleteService } from "@/actions/serviceActions";
 import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 import { EditIcon } from "@/components/admin/icons/EditIcon";
 import { useState } from "react";
 import { UpdateServiceForm } from "@/components/admin/forms/UpdateServiceForm";
 import { Decimal } from "@prisma/client-runtime-utils";
+import { applyDiscount, isDiscountActive } from "@/utils/discounts";
+
 export default function ServiceDetails({
   service,
+  subcategoryDiscount,
+  categoryDiscount,
 }: {
-  service: Omit<Service, "price"> & { price: Decimal };
+  service: Omit<Service, "price"> & {
+    price: Decimal | null;
+    discount: Discount | null;
+  };
+  subcategoryDiscount: Discount | null;
+  categoryDiscount: Discount | null;
 }) {
   const [updateServiceIsOpen, setUpdateServiceIsOpen] = useState(false);
+
+  const originalPrice = Number(service.price);
+
+  const activeDiscount =
+    service.discount ?? subcategoryDiscount ?? categoryDiscount;
+
+  const hasActiveDiscount =
+    activeDiscount &&
+    isDiscountActive(activeDiscount.startDate, activeDiscount.endDate);
+
+  const discountedPrice = hasActiveDiscount
+    ? applyDiscount(
+        originalPrice,
+        activeDiscount.discountType,
+        Number(activeDiscount.value),
+      )
+    : originalPrice;
 
   return (
     <>
@@ -20,10 +46,23 @@ export default function ServiceDetails({
         </div>
 
         <div className="flex items-center gap-3 text-sm">
-          <span className="text-gray-400">{service.duration}mn</span>
-          <span className="font-bold text-gray-600">
-            {Number(service.price)}€
-          </span>
+          {service.duration && (
+            <span className="text-gray-400">{service.duration} min</span>
+          )}
+          {hasActiveDiscount ? (
+            <>
+              <span className="text-gray-400 line-through">
+                {originalPrice}€
+              </span>
+
+              <span className="font-bold text-pink-600">
+                {discountedPrice}€
+              </span>
+            </>
+          ) : (
+            <span className="font-bold text-gray-600">{originalPrice}€</span>
+          )}
+          <span>{service.details}</span>
           <button
             onClick={() => setUpdateServiceIsOpen(true)}
             title="Modifier le service"
@@ -40,7 +79,6 @@ export default function ServiceDetails({
           </button>
         </div>
 
-        {/* Ligne de séparation pointillée entre les services */}
         <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
       </div>
 

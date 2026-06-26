@@ -44,61 +44,91 @@ export function ContactForm() {
   }, [state.success]);
 
   return (
-    <form ref={formRef} action={action}>
-      <div>
-        <label htmlFor="nom">Nom</label>
-        <input
-          id="nom"
-          name="nom"
-          defaultValue={state.values.nom}
-          required
-          placeholder="Votre nom"
-          className={`border p-2 w-full ${
-            state.errors.nom?.length ? "border-red-500" : "border-gray-300"
-          }`}
-        />
-        {state.errors.nom?.[0] && (
-          <p className="text-red-500 text-sm mt-1">{state.errors.nom[0]}</p>
-        )}
+    <form ref={formRef} action={action} className="space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label
+            htmlFor="nom"
+            className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+          >
+            Nom
+          </label>
+          <input
+            id="nom"
+            name="nom"
+            defaultValue={state.values.nom}
+            required
+            placeholder="Votre nom"
+            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+              state.errors.nom?.length
+                ? "border-red-500"
+                : "border-[#1A2F1A]/15"
+            }`}
+          />
+          {state.errors.nom?.[0] && (
+            <p className="mt-2 text-sm text-red-600">{state.errors.nom[0]}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="prenom"
+            className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+          >
+            Prénom
+          </label>
+          <input
+            id="prenom"
+            name="prenom"
+            defaultValue={state.values.prenom}
+            required
+            placeholder="Votre prénom"
+            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+              state.errors.prenom?.length
+                ? "border-red-500"
+                : "border-[#1A2F1A]/15"
+            }`}
+          />
+          {state.errors.prenom?.[0] && (
+            <p className="mt-2 text-sm text-red-600">
+              {state.errors.prenom[0]}
+            </p>
+          )}
+        </div>
       </div>
 
       <div>
-        <label htmlFor="prenom">Prénom</label>
-        <input
-          id="prenom"
-          name="prenom"
-          defaultValue={state.values.prenom}
-          required
-          placeholder="Votre prénom"
-          className={`border p-2 w-full ${
-            state.errors.prenom?.length ? "border-red-500" : "border-gray-300"
-          }`}
-        />
-
-        {state.errors.prenom?.[0] && (
-          <p className="text-red-500 text-sm mt-1">{state.errors.prenom[0]}</p>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="email">Email</label>
+        <label
+          htmlFor="email"
+          className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+        >
+          Email
+        </label>
         <input
           id="email"
           name="email"
+          type="email"
           defaultValue={state.values.email}
           required
           placeholder="email@exemple.com"
-          className={`border p-2 w-full ${
-            state.errors.email?.length ? "border-red-500" : "border-gray-300"
+          className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+            state.errors.email?.length
+              ? "border-red-500"
+              : "border-[#1A2F1A]/15"
           }`}
         />
         {state.errors.email?.[0] && (
-          <p className="text-red-500 text-sm mt-1">{state.errors.email[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{state.errors.email[0]}</p>
         )}
       </div>
 
       <div>
-        <label htmlFor="message">Message</label>
+        <label
+          htmlFor="message"
+          className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+        >
+          Message
+        </label>
         <textarea
           id="message"
           name="message"
@@ -106,18 +136,19 @@ export function ContactForm() {
           required
           rows={5}
           placeholder="Votre message..."
-          className={`border p-2 w-full ${
-            state.errors.message?.length ? "border-red-500" : "border-gray-300"
+          className={`w-full resize-none rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+            state.errors.message?.length
+              ? "border-red-500"
+              : "border-[#1A2F1A]/15"
           }`}
         />
         {state.errors.message?.[0] && (
-          <p className="text-red-500 text-sm mt-1">{state.errors.message[0]}</p>
+          <p className="mt-2 text-sm text-red-600">{state.errors.message[0]}</p>
         )}
       </div>
 
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label htmlFor="website">Ne pas remplir ce champ</label>
-
         <input
           type="text"
           id="website"
@@ -126,12 +157,18 @@ export function ContactForm() {
           autoComplete="off"
         />
       </div>
+
       {state.success && (
-        <p className="text-green-600 text-sm">
+        <p className="rounded-2xl bg-[#B7D8A8]/25 px-4 py-3 text-sm font-medium text-[#1A2F1A]">
           Votre message a bien été envoyé.
         </p>
       )}
-      <button type="submit" disabled={pending} className="">
+
+      <button
+        type="submit"
+        disabled={pending}
+        className="inline-flex w-full items-center justify-center rounded-full bg-[#1A2F1A] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      >
         {pending ? "Envoi en cours..." : "Envoyer"}
       </button>
     </form>

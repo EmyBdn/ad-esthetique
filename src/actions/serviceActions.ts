@@ -55,7 +55,7 @@ export async function createService(previous: any, formData: FormData) {
     const newService = await prisma.service.create({
       data: {
         label: label,
-        duration: duration,
+        duration: duration || null,
         price: price,
         details: details,
         position: (maxOrder._max.position ?? 0) + 1,
