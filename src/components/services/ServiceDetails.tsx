@@ -46,7 +46,9 @@ export default function ServiceDetails({
         </div>
 
         <div className="flex items-center gap-3 text-sm">
-          <span className="text-gray-400">{service.duration}mn</span>
+          {service.duration && (
+            <span className="text-gray-400">{service.duration} min</span>
+          )}
           {hasActiveDiscount ? (
             <>
               <span className="text-gray-400 line-through">

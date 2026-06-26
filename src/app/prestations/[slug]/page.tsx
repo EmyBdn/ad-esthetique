@@ -115,9 +115,11 @@ export default async function PrestationDetailsPage({
                             <h3 className="font-medium text-[#1A2F1A]">
                               {service.label}
                             </h3>
-                            <p className="mt-1 text-sm text-[#1A2F1A]/55">
-                              {service.duration} min
-                            </p>
+                            {service.duration && (
+                              <p className="mt-1 text-sm text-[#1A2F1A]/55">
+                                {service.duration} min
+                              </p>
+                            )}
                           </div>
 
                           <div className="shrink-0 text-right">
