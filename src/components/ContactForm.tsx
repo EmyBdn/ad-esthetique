@@ -44,12 +44,12 @@ export function ContactForm() {
   }, [state.success]);
 
   return (
-    <form ref={formRef} action={action} className="space-y-5">
+    <form ref={formRef} action={action} className="space-y-3">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
             htmlFor="nom"
-            className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+            className="mb-2 block text-sm font-medium text-[#394B39]"
           >
             Nom
           </label>
@@ -59,21 +59,21 @@ export function ContactForm() {
             defaultValue={state.values.nom}
             required
             placeholder="Votre nom"
-            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#394B39] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#394B39] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
               state.errors.nom?.length
                 ? "border-red-500"
                 : "border-[#1A2F1A]/15"
             }`}
           />
-          {state.errors.nom?.[0] && (
-            <p className="mt-2 text-sm text-red-600">{state.errors.nom[0]}</p>
-          )}
+          <p className="mt-1 h-4 text-sm leading-none text-red-600">
+            {state.errors.nom?.[0] ?? " "}
+          </p>
         </div>
 
         <div>
           <label
             htmlFor="prenom"
-            className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+            className="mb-2 block text-sm font-medium text-[#394B39]"
           >
             Prénom
           </label>
@@ -83,24 +83,22 @@ export function ContactForm() {
             defaultValue={state.values.prenom}
             required
             placeholder="Votre prénom"
-            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+            className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#394B39] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#394B39] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
               state.errors.prenom?.length
                 ? "border-red-500"
                 : "border-[#1A2F1A]/15"
             }`}
           />
-          {state.errors.prenom?.[0] && (
-            <p className="mt-2 text-sm text-red-600">
-              {state.errors.prenom[0]}
-            </p>
-          )}
+          <p className="mt-1 h-4 text-sm leading-none text-red-600">
+            {state.errors.prenom?.[0] ?? " "}
+          </p>
         </div>
       </div>
 
       <div>
         <label
           htmlFor="email"
-          className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+          className="mb-2 block text-sm font-medium text-[#394B39]"
         >
           Email
         </label>
@@ -111,21 +109,21 @@ export function ContactForm() {
           defaultValue={state.values.email}
           required
           placeholder="email@exemple.com"
-          className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+          className={`w-full rounded-2xl border bg-white px-4 py-3 text-[#394B39] outline-none transition placeholder:text-[#394B39]/35 focus:border-[#394B39] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
             state.errors.email?.length
               ? "border-red-500"
               : "border-[#1A2F1A]/15"
           }`}
         />
-        {state.errors.email?.[0] && (
-          <p className="mt-2 text-sm text-red-600">{state.errors.email[0]}</p>
-        )}
+        <p className="mt-1 h-4 text-sm leading-none text-red-600">
+          {state.errors.email?.[0] ?? " "}
+        </p>
       </div>
 
       <div>
         <label
           htmlFor="message"
-          className="mb-2 block text-sm font-medium text-[#1A2F1A]"
+          className="mb-2 block text-sm font-medium text-[#394B39]"
         >
           Message
         </label>
@@ -136,15 +134,15 @@ export function ContactForm() {
           required
           rows={5}
           placeholder="Votre message..."
-          className={`w-full resize-none rounded-2xl border bg-white px-4 py-3 text-[#1A2F1A] outline-none transition placeholder:text-[#1A2F1A]/35 focus:border-[#1A2F1A] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
+          className={`w-full resize-none rounded-2xl border bg-white px-4 py-3 text-[#394B39] outline-none transition placeholder:text-[#394B39]/35 focus:border-[#394B39] focus:ring-4 focus:ring-[#B7D8A8]/30 ${
             state.errors.message?.length
               ? "border-red-500"
               : "border-[#1A2F1A]/15"
           }`}
         />
-        {state.errors.message?.[0] && (
-          <p className="mt-2 text-sm text-red-600">{state.errors.message[0]}</p>
-        )}
+        <p className="mt-1 h-4 text-sm leading-none text-red-600">
+          {state.errors.message?.[0] ?? " "}
+        </p>
       </div>
 
       <div className="absolute left-[-9999px]" aria-hidden="true">
@@ -159,7 +157,7 @@ export function ContactForm() {
       </div>
 
       {state.success && (
-        <p className="rounded-2xl bg-[#B7D8A8]/25 px-4 py-3 text-sm font-medium text-[#1A2F1A]">
+        <p className="rounded-2xl bg-[#B7D8A8]/25 px-4 py-3 text-sm font-medium text-[#394B39]">
           Votre message a bien été envoyé.
         </p>
       )}
@@ -167,7 +165,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center rounded-full bg-[#1A2F1A] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="inline-flex w-full items-center justify-center rounded-full bg-[#394B39] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#394B39] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {pending ? "Envoi en cours..." : "Envoyer"}
       </button>

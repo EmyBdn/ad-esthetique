@@ -19,7 +19,7 @@ export default async function PrestationsPage() {
             <Link
               key={category.id}
               href={`/prestations/${category.slug}`}
-              className="group block overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl border border-gray-100 hover:-translate-y-1"
+              className="group block overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-md border border-gray-100 hover:-translate-y-1"
             >
               <div className="relative aspect-video w-full overflow-hidden bg-gray-200">
                 {category.image ? (
@@ -36,14 +36,13 @@ export default async function PrestationsPage() {
                 )}
               </div>
 
-              {/* Contenu de la carte */}
               <div className="p-6">
-                <h3 className="mb-2 text-xl font-semibold text-gray-800 group-hover:text-pink-600 transition-colors">
+                <h3 className="mb-2 text-center font-serif text-2xl leading-none tracking-tight text-[#394B39]">
                   {category.label}
                 </h3>
 
                 {category.description && (
-                  <p className="text-sm text-gray-600">
+                  <p className="text-left text-sm mt-3 font-light leading-relaxed text-[#1A2F1A]/70">
                     {category.description}
                   </p>
                 )}

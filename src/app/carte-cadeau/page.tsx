@@ -15,8 +15,8 @@ export default function GiftCardPage() {
       <Hero title="Carte cadeau" imageSrc="/images/hero-salon.jpg" />
 
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:py-20">
-        <section className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-100 shadow-sm">
+        <section className="grid gap-10 lg:grid-cols-2 lg:items-stretch">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-100 shadow-sm lg:aspect-auto lg:h-full">
             <Image
               src="/images/carte-cadeau.jpg"
               alt="Carte cadeau AD Esthétique"
@@ -30,7 +30,7 @@ export default function GiftCardPage() {
               Offrir du bien-être
             </p>
 
-            <h2 className="font-serif text-3xl leading-tight text-[#1A2F1A] sm:text-4xl">
+            <h2 className="font-serif text-3xl leading-tight text-[#394B39] sm:text-4xl">
               Une attention douce et personnalisée
             </h2>
 
@@ -45,12 +45,12 @@ export default function GiftCardPage() {
               <li>- Message personnalisé</li>
             </ul>
 
-            <div className="mt-8 rounded-2xl bg-[#FAF8F4] p-5">
-              <h3 className="font-semibold text-[#1A2F1A]">
+            <div className="mt-8 rounded-xl border border-[#1A2F1A]/10 bg-[#FAF8F4] p-5">
+              <h3 className="font-semibold text-[#394B39]">
                 Deux possibilités pour l’achat :
               </h3>
 
-              <ol className="mt-4 space-y-3 text-sm leading-relaxed text-[#1A2F1A]/80">
+              <ol className="mt-4 space-y-3 text-sm leading-relaxed text-[#394B39]">
                 <li>
                   Réservez votre carte cadeau en ligne pour l’avoir directement.
                 </li>
@@ -72,7 +72,7 @@ export default function GiftCardPage() {
                 href="https://www.planity.com/ad-esthetique-37100-tours"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-full bg-[#1A2F1A] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A] sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[#394B39] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#394B39] sm:w-auto"
               >
                 Réserver en ligne
               </Link>
