@@ -15,6 +15,7 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -140,8 +141,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-[#F8F6F1]/10 text-center text-[10px] text-[#F8F6F1]/45 tracking-[0.2em] uppercase">
-          © {new Date().getFullYear()} AD Esthétique
+        <div className="flex flex-col items-center gap-2">
+          <div className="pt-8 border-[#F8F6F1]/10 text-center text-[10px] text-[#F8F6F1]/45 tracking-[0.2em] uppercase">
+            © {new Date().getFullYear()} AD Esthétique
+          </div>
+          <Link
+            href="/mentions-legales"
+            className="inline-block text-xs text-[#F8F6F1]/50 transition-colors hover:text-white"
+          >
+            Mentions légales
+          </Link>
         </div>
       </div>
     </footer>
