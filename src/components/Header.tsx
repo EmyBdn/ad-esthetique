@@ -110,12 +110,10 @@ export default function Header({
             <Image
               src="/images/logo.jpg"
               alt="Logo AD Esthétique"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain"
+              width={52}
+              height={52}
+              className="h-12 w-12 object-contain"
             />
-
-            <span>AD Esthétique</span>
           </Link>
 
           {/* Desktop navigation */}

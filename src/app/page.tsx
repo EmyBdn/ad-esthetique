@@ -10,7 +10,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl py-12 lg:py-24">
         <div className="grid gap-10 md:grid-cols-2 md:items-center md:px-6 lg:gap-20">
           <div className="order-2 md:order-1">
-            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-sm">
+            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-sm rounded-xl">
               <Image
                 src="/images/estheticienne-maquillage.jpg"
                 alt="Esthéticienne réalisant un  maquillage"
@@ -26,7 +26,7 @@ export default function Home() {
               Tours
             </span>
 
-            <h2 className="font-serif text-3xl italic leading-tight text-[#1A2F1A] md:text-4xl">
+            <h2 className="font-serif text-3xl italic leading-tight text-[#394B39] md:text-4xl">
               Un salon pensé pour <br className="hidden md:block" /> votre
               bien-être
             </h2>
@@ -42,14 +42,14 @@ export default function Home() {
                 href="https://www.planity.com/ad-esthetique-37100-tours"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#1A2F1A] px-6 text-center text-sm font-semibold leading-none text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1A2F1A] sm:w-auto sm:min-w-56"
+                className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#394B39] px-6 text-center text-sm font-semibold leading-none text-white transition hover:bg-[#B7D8A8] hover:text-[#394B39] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1A2F1A] sm:w-auto sm:min-w-56"
               >
                 Prendre rendez-vous
               </Link>
 
               <Link
                 href="/prestations"
-                className="flex min-h-14 w-full items-center justify-center rounded-full border border-[#1A2F1A]/20 bg-white px-6 text-center text-sm font-semibold leading-none text-[#1A2F1A] transition hover:bg-[#B7D8A8]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1A2F1A] sm:w-auto sm:min-w-56"
+                className="flex min-h-14 w-full items-center justify-center rounded-full border border-[#1A2F1A]/20 bg-white px-6 text-center text-sm font-semibold leading-none text-[#394B39] transition hover:bg-[#B7D8A8]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1A2F1A] sm:w-auto sm:min-w-56"
               >
                 Voir les prestations
               </Link>

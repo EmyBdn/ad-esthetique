@@ -25,7 +25,11 @@ export default function CategoryCard({
   });
 
   return (
-    <div ref={ref} key={category.id} className="relative group">
+    <div
+      ref={ref}
+      key={category.id}
+      className="relative group hover:transition-all hover:-translate-y-1"
+    >
       <div className="absolute top-4 left-4 z-10 flex gap-2">
         <button
           ref={handleRef}
@@ -39,7 +43,7 @@ export default function CategoryCard({
         <button
           onClick={() => setModalIsOpen(true)}
           title="Modifier la catégorie"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-blue-600 hover:scale-110 transition-all"
+          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm hover:shadow-md text-slate-600 hover:text-blue-600 hover:scale-110 transition-all"
         >
           <EditIcon />
         </button>
@@ -54,7 +58,7 @@ export default function CategoryCard({
 
       <Link
         href={`/admin/dashboard/${category.slug}`}
-        className="block overflow-hidden rounded-xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
+        className="block overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100"
       >
         <div className="relative aspect-video overflow-hidden bg-gray-100">
           {category.image ? (
@@ -71,7 +75,7 @@ export default function CategoryCard({
           )}
         </div>
         <div className="p-6">
-          <h3 className="font-semibold text-xl text-gray-800 group-hover:text-pink-600 transition-colors">
+          <h3 className="font-semibold text-xl text-gray-800 group-hover:text-[#B7D8A8] transition-colors">
             {category.label}
           </h3>
           <p>{category.description}</p>

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { applyDiscount, isDiscountActive } from "@/utils/discounts";
+import { ChevronLeft } from "lucide-react";
 
 export default async function PrestationDetailsPage({
   params,
@@ -40,32 +41,44 @@ export default async function PrestationDetailsPage({
   if (!category) {
     notFound();
   }
+
   return (
     <>
       <Hero title={category.label} imageSrc="/images/hero-salon.jpg" />
+
       <main className="mx-auto max-w-6xl px-6 py-12">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/prestations"
-            className="inline-flex items-center text-sm font-medium text-[#1A2F1A]/70 transition hover:text-[#1A2F1A]"
+            className="inline-flex items-center gap-1.5 text-sm text-[#394B39]/60 transition-colors duration-200 hover:text-[#394B39]"
           >
-            ← Retour aux prestations
+            <ChevronLeft className="h-4 w-4" />
+            <span>Retour aux prestations</span>
           </Link>
 
           <Link
             href="https://www.planity.com/ad-esthetique-37100-tours"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-[#1A2F1A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#1A2F1A]"
+            className="inline-flex items-center justify-center rounded-full bg-[#394B39] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#394B39]"
           >
             Réserver en ligne
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+
+        <div
+          className={`grid grid-cols-1 gap-8 justify-center ${
+            category.subcategories.length === 1
+              ? "max-w-sm mx-auto"
+              : category.subcategories.length === 2
+                ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                : "sm:grid-cols-2 xl:grid-cols-3"
+          }`}
+        >
           {category.subcategories.map((subcat) => (
             <div
               key={subcat.id}
-              className="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md"
+              className="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm"
             >
               {subcat.image && (
                 <div className="relative h-48 w-full overflow-hidden">
@@ -79,11 +92,13 @@ export default async function PrestationDetailsPage({
               )}
 
               <div className="p-8">
-                <h2 className="text-xl font-semibold text-center text-slate-700 mb-2">
+                <h2 className="mb-4 text-center font-serif text-2xl leading-none tracking-tight text-[#394B39]">
                   {subcat.label}
                 </h2>
-                <div className="w-16 h-0.5 bg-green-300 mx-auto mb-8"></div>
-                <div className="space-y-6">
+
+                <div className="mx-auto mb-5 h-px w-20 bg-gradient-to-r from-transparent via-[#B7D8A8] to-transparent" />
+
+                <div className="space-y-4">
                   {subcat.services.map((service) => {
                     const originalPrice = Number(service.price);
 
@@ -108,15 +123,16 @@ export default async function PrestationDetailsPage({
                     return (
                       <div
                         key={service.id}
-                        className="border-b border-[#1A2F1A]/10 pb-5 last:border-0 last:pb-0"
+                        className="border-b border-[#1A2F1A]/10 pb-4 last:border-0 last:pb-0"
                       >
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start justify-between gap-2">
                           <div>
-                            <h3 className="font-medium text-[#1A2F1A]">
+                            <h3 className="font-medium text-[#394B39]">
                               {service.label}
                             </h3>
+
                             {service.duration && (
-                              <p className="mt-1 text-sm text-[#1A2F1A]/55">
+                              <p className="text-sm text-[#1A2F1A]/55">
                                 {service.duration} min
                               </p>
                             )}
@@ -125,15 +141,16 @@ export default async function PrestationDetailsPage({
                           <div className="shrink-0 text-right">
                             {hasActiveDiscount ? (
                               <>
-                                <p className="text-sm text-[#1A2F1A]/40 line-through">
+                                <p className="text-sm text-[#394B39]/40 line-through">
                                   {originalPrice}€
                                 </p>
-                                <p className="font-semibold text-pink-600">
+
+                                <p className="text-lg font-semibold text-[#394B39]">
                                   {discountedPrice}€
                                 </p>
                               </>
                             ) : (
-                              <p className="font-semibold text-[#1A2F1A]">
+                              <p className="font-semibold text-[#394B39]">
                                 {originalPrice}€
                               </p>
                             )}
@@ -149,7 +166,7 @@ export default async function PrestationDetailsPage({
         </div>
 
         {category.subcategories.length === 0 && (
-          <p className="text-center text-gray-500 py-20">
+          <p className="py-20 text-center text-gray-500">
             Aucune prestation n'est disponible dans cette catégorie.
           </p>
         )}
