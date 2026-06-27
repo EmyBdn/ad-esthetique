@@ -105,7 +105,7 @@ export default function Footer() {
 
             <ul className="text-sm font-light flex flex-col items-center sm:items-stretch text-[#F8F6F1]/80">
               {[
-                { day: "Lun – Ven", time: "8h30 – 19h" },
+                { day: "Lun – Ven", time: "9h – 19h" },
                 { day: "Sam", time: "09h30 – 17h" },
                 { day: "Dim", time: "Fermé", isClosed: true },
               ].map((item, index) => (
