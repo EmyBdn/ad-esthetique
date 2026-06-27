@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   title: "Institut de beauté",
   description:
     "Soins esthétiques, épilations, soins visage et corps. Prenez rendez-vous en ligne.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
