@@ -69,7 +69,7 @@ export default function CategoryCard({
 
       <Link
         href={`/admin/dashboard/${category.slug}`}
-        className="block overflow-hidden rounded-xl border border-[#394B39]/10 bg-white shadow-sm transition hover:shadow-md"
+        className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md"
       >
         <div className="relative aspect-video overflow-hidden bg-[#FAF8F4]">
           {category.image ? (
@@ -86,13 +86,13 @@ export default function CategoryCard({
           )}
         </div>
 
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           <h3 className="text-center font-serif text-2xl leading-none tracking-tight text-[#394B39] transition-colors">
             {category.label}
           </h3>
 
           {category.description && (
-            <p className="mt-4 text-sm font-light leading-relaxed text-[#1A2F1A]/70">
+            <p className="mt-4 flex-1 text-sm font-light leading-relaxed text-[#1A2F1A]/70">
               {category.description}
             </p>
           )}

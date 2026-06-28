@@ -40,7 +40,7 @@ export function CategoryList({ categories }: Props) {
 
   return (
     <DragDropProvider onDragEnd={handleOnDragEnd}>
-      <div className="grid grid-cols-1 gap-8 pt-2 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 items-stretch pt-2 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((category, index) => (
           <CategoryCard key={category.id} category={category} index={index} />
         ))}
