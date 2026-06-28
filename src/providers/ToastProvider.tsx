@@ -3,5 +3,5 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function ToastProvider() {
-  return <ToastContainer position={"top-right"} theme={"light"} />;
+  return <ToastContainer position={"bottom-right"} theme={"light"} />;
 }
