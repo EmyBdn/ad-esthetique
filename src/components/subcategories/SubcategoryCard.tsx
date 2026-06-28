@@ -37,15 +37,11 @@ export default function SubcategoryCard({
   index,
 }: Props) {
   const [updateSubCategoryIsOpen, setUpdateSubCategoryIsOpen] = useState(false);
-
   const [addServiceIsOpen, setAddServiceIsOpen] = useState(false);
-
   const [selectedServiceId, setSelectedServiceId] = useState<string | null>(
     null,
   );
-
   const [orderedServices, setOrderedServices] = useState(services);
-
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -65,9 +61,7 @@ export default function SubcategoryCard({
     const targetIndex =
       direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
-    if (targetIndex < 0 || targetIndex >= orderedServices.length) {
-      return;
-    }
+    if (targetIndex < 0 || targetIndex >= orderedServices.length) return;
 
     const nextServices = [...orderedServices];
 
@@ -92,57 +86,69 @@ export default function SubcategoryCard({
   return (
     <div
       ref={ref}
-      className="relative flex flex-col bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm"
     >
-      <div className="absolute top-4 left-4 z-10">
+      <div className="absolute left-4 top-4 z-10 flex gap-2">
         <button
           ref={handleRef}
           title="Déplacer"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 cursor-grab active:cursor-grabbing flex items-center justify-center"
+          className="flex cursor-grab items-center justify-center rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:text-[#394B39] active:cursor-grabbing"
         >
           <DragIcon />
         </button>
       </div>
 
-      <div className="absolute top-4 right-4 z-10 flex gap-2">
+      <div className="absolute right-4 top-4 z-10 flex gap-2">
         <button
           onClick={() => setUpdateSubCategoryIsOpen(true)}
           title="Modifier la sous-catégorie"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-blue-600 hover:scale-110 transition-all"
+          className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:scale-110 hover:text-[#394B39]"
         >
           <EditIcon />
         </button>
 
         <button
           title="Supprimer la sous-catégorie"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-red-600 hover:scale-110 transition-all"
-          onClick={() => deleteSubCategory(subcategory.id)}
+          className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:scale-110 hover:text-red-600"
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Supprimer définitivement cette sous-catégorie ?",
+            );
+
+            if (!confirmed) return;
+
+            deleteSubCategory(subcategory.id);
+          }}
         >
           <DeleteIcon />
         </button>
       </div>
 
       {subcategory.image && (
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative h-48 w-full overflow-hidden">
           <Image
+            fill
             src={subcategory.image}
             alt={subcategory.label}
-            fill
             className="object-cover"
           />
         </div>
       )}
 
       <div className="p-8">
-        <h2 className="text-2xl font-serif text-center text-slate-700 mb-2">
+        <h2 className="mb-4 text-center font-serif text-2xl leading-none tracking-tight text-[#394B39]">
           {subcategory.label}
         </h2>
 
-        <p>{subcategory.description}</p>
+        <div className="mx-auto mb-5 h-px w-20 bg-gradient-to-r from-transparent via-[#B7D8A8] to-transparent" />
 
-        <div className="w-16 h-0.5 bg-amber-200 mx-auto mb-8"></div>
+        {subcategory.description && (
+          <p className="mb-6 text-sm font-light leading-relaxed text-[#1A2F1A]/70">
+            {subcategory.description}
+          </p>
+        )}
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {orderedServices.map((service, serviceIndex) => {
             const isSelected = selectedServiceId === service.id;
 
@@ -154,10 +160,10 @@ export default function SubcategoryCard({
                     selectedServiceId === service.id ? null : service.id,
                   )
                 }
-                className={`relative rounded-2xl transition-all cursor-pointer ${
+                className={`relative cursor-pointer transition ${
                   isSelected
-                    ? "ring-2 ring-amber-300 ring-offset-2"
-                    : "ring-1 ring-transparent"
+                    ? "rounded-xl bg-[#FAF8F4] p-4 ring-2 ring-[#B7D8A8]"
+                    : ""
                 }`}
               >
                 <ServiceDetails
@@ -167,7 +173,7 @@ export default function SubcategoryCard({
                 />
 
                 {isSelected && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+                  <div className="absolute right-3 top-1/2 flex -translate-y-1/2 flex-col gap-2">
                     <button
                       type="button"
                       disabled={serviceIndex === 0 || isPending}
@@ -175,7 +181,7 @@ export default function SubcategoryCard({
                         event.stopPropagation();
                         moveService(service.id, "up");
                       }}
-                      className="rounded-full bg-white shadow px-2 py-1 disabled:opacity-30"
+                      className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-[#394B39] shadow-sm transition hover:bg-[#B7D8A8]/30 disabled:opacity-30"
                     >
                       ↑
                     </button>
@@ -189,7 +195,7 @@ export default function SubcategoryCard({
                         event.stopPropagation();
                         moveService(service.id, "down");
                       }}
-                      className="rounded-full bg-white shadow px-2 py-1 disabled:opacity-30"
+                      className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-[#394B39] shadow-sm transition hover:bg-[#B7D8A8]/30 disabled:opacity-30"
                     >
                       ↓
                     </button>
@@ -200,7 +206,10 @@ export default function SubcategoryCard({
           })}
         </div>
 
-        <button onClick={() => setAddServiceIsOpen(true)}>
+        <button
+          onClick={() => setAddServiceIsOpen(true)}
+          className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#394B39] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B7D8A8] hover:text-[#394B39]"
+        >
           Ajouter un service
         </button>
       </div>

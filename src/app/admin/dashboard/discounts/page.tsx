@@ -66,37 +66,60 @@ export default async function DiscountsPage() {
   );
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-8">
+    <main className="relative mx-auto max-w-6xl px-6 py-12">
+      <div className="mb-10 pr-0 sm:pr-64">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#1A2F1A]/60">
+          Offres
+        </p>
+
+        <h1 className="font-serif text-3xl text-[#394B39] sm:text-4xl">
+          Promotions
+        </h1>
+      </div>
+
       <AddDiscountButton
         categories={categories}
         subcategories={subcategories}
         services={services}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-        <div className="rounded-2xl border p-6">
-          <p className="text-sm text-gray-500">En cours</p>
-          <p className="text-3xl font-semibold">{activeDiscounts.length}</p>
+
+      <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="rounded-xl border border-[#394B39]/10 bg-[#FAF8F4] p-6 shadow-sm">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-[#1A2F1A]/50">
+            En cours
+          </p>
+          <p className="font-serif text-4xl text-[#394B39]">
+            {activeDiscounts.length}
+          </p>
         </div>
 
-        <div className="rounded-2xl border p-6">
-          <p className="text-sm text-gray-500">À venir</p>
-          <p className="text-3xl font-semibold">{upcomingDiscounts.length}</p>
+        <div className="rounded-xl border border-[#394B39]/10 bg-white p-6 shadow-sm">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-[#1A2F1A]/50">
+            À venir
+          </p>
+          <p className="font-serif text-4xl text-[#394B39]">
+            {upcomingDiscounts.length}
+          </p>
         </div>
 
-        <div className="rounded-2xl border p-6">
-          <p className="text-sm text-gray-500">Terminées</p>
-          <p className="text-3xl font-semibold">{endedDiscounts.length}</p>
+        <div className="rounded-xl border border-[#394B39]/10 bg-white p-6 shadow-sm">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-[#1A2F1A]/50">
+            Terminées
+          </p>
+          <p className="font-serif text-4xl text-[#394B39]">
+            {endedDiscounts.length}
+          </p>
         </div>
       </div>
 
       {discounts.length === 0 ? (
-        <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-2xl">
-          <p className="text-gray-500">
+        <div className="rounded-xl border border-dashed border-[#394B39]/20 bg-[#FAF8F4] py-20 text-center">
+          <p className="text-[#1A2F1A]/60">
             Aucune promotion n&apos;a encore été créée.
           </p>
         </div>
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-12">
           <DiscountSection
             title="Promotions en cours"
             discounts={activeDiscounts}

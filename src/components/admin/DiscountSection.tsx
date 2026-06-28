@@ -53,34 +53,36 @@ export function DiscountSection({
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-4">{title}</h2>
+      <h2 className="mb-5 font-serif text-2xl text-[#394B39]">{title}</h2>
 
       {discounts.length === 0 ? (
-        <p className="text-sm text-gray-500">Aucune promotion.</p>
+        <p className="rounded-xl border border-[#394B39]/10 bg-[#FAF8F4] p-5 text-sm text-[#1A2F1A]/60">
+          Aucune promotion.
+        </p>
       ) : (
         <div className="space-y-3">
           {discounts.map((discount) => (
             <div
               key={discount.id}
-              className="rounded-xl border p-4 flex items-center justify-between"
+              className="flex items-center justify-between gap-4 rounded-xl border border-[#394B39]/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div>
-                <p className="font-medium">{discount.label}</p>
+                <p className="font-medium text-[#394B39]">{discount.label}</p>
 
-                <p className="text-sm text-gray-500">
+                <p className="mt-1 text-sm text-[#1A2F1A]/55">
                   {discount.startDate.toLocaleDateString("fr-FR")} →{" "}
                   {discount.endDate.toLocaleDateString("fr-FR")}
                 </p>
               </div>
 
               {(showEndAction || showDeleteAction) && (
-                <div className="flex items-center gap-3">
+                <div className="flex shrink-0 items-center gap-2">
                   {showEndAction && (
                     <button
                       type="button"
                       title="Terminer la promotion"
                       onClick={() => handleEndDiscount(discount.id)}
-                      className="text-slate-500 hover:text-slate-800 transition"
+                      className="rounded-full bg-[#FAF8F4] p-2 text-[#394B39]/60 transition hover:bg-[#B7D8A8]/30 hover:text-[#394B39]"
                     >
                       <ArchiveIcon />
                     </button>
@@ -91,7 +93,7 @@ export function DiscountSection({
                       type="button"
                       title="Supprimer la promotion"
                       onClick={() => handleDeleteDiscount(discount.id)}
-                      className="text-red-500 hover:text-red-700 transition"
+                      className="rounded-full bg-red-50 p-2 text-red-500 transition hover:bg-red-100 hover:text-red-700"
                     >
                       <DeleteIcon />
                     </button>

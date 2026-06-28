@@ -40,46 +40,70 @@ export default function ServiceDetails({
 
   return (
     <>
-      <div key={service.id} className="group">
-        <div className="flex justify-between items-center mb-1">
-          <span className="font-medium text-gray-700">{service.label}</span>
+      <div className="border-b border-[#1A2F1A]/10 pb-4 last:border-0 last:pb-0">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <h3 className="font-medium text-[#394B39]">{service.label}</h3>
+
+            {service.duration && (
+              <p className="text-sm text-[#1A2F1A]/55">
+                {service.duration} min
+              </p>
+            )}
+
+            {service.details && (
+              <p className="mt-2 text-sm font-light leading-relaxed text-[#1A2F1A]/65">
+                {service.details}
+              </p>
+            )}
+          </div>
+
+          <div className="flex shrink-0 items-start gap-3 text-right">
+            {originalPrice > 0 && (
+              <div>
+                {hasActiveDiscount ? (
+                  <>
+                    <p className="text-sm text-[#394B39]/40 line-through">
+                      {originalPrice}€
+                    </p>
+
+                    <p className="font-semibold text-[#394B39]">
+                      {discountedPrice}€
+                    </p>
+                  </>
+                ) : (
+                  <p className="font-semibold text-[#394B39]">
+                    {originalPrice}€
+                  </p>
+                )}
+              </div>
+            )}
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setUpdateServiceIsOpen(true);
+                }}
+                title="Modifier le service"
+                className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm transition hover:bg-[#B7D8A8]/30 hover:text-[#394B39]"
+              >
+                <EditIcon />
+              </button>
+
+              <button
+                title="Supprimer le service"
+                className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm transition hover:bg-red-50 hover:text-red-600"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  deleteService(service.id);
+                }}
+              >
+                <DeleteIcon />
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div className="flex items-center gap-3 text-sm">
-          {service.duration && (
-            <span className="text-gray-400">{service.duration} min</span>
-          )}
-          {hasActiveDiscount ? (
-            <>
-              <span className="text-gray-400 line-through">
-                {originalPrice}€
-              </span>
-
-              <span className="font-bold text-pink-600">
-                {discountedPrice}€
-              </span>
-            </>
-          ) : (
-            <span className="font-bold text-gray-600">{originalPrice}€</span>
-          )}
-          <span>{service.details}</span>
-          <button
-            onClick={() => setUpdateServiceIsOpen(true)}
-            title="Modifier le service"
-            className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-blue-600 hover:scale-110 transition-all"
-          >
-            <EditIcon />
-          </button>
-          <button
-            title="Supprimer le service"
-            className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-red-600 hover:scale-110 transition-all"
-            onClick={() => deleteService(service.id)}
-          >
-            <DeleteIcon />
-          </button>
-        </div>
-
-        <div className="mt-4 border-b border-dotted border-gray-200 last:hidden"></div>
       </div>
 
       {updateServiceIsOpen && (

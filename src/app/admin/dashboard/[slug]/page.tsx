@@ -32,7 +32,17 @@ export default async function AdminSubcategoryPage({
   if (!category) notFound();
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-12">
+    <main className="relative mx-auto max-w-6xl px-6 py-12">
+      <div className="mb-10 pr-0 sm:pr-72">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#1A2F1A]/60">
+          Catégorie
+        </p>
+
+        <h1 className="font-serif text-3xl text-[#394B39] sm:text-4xl">
+          {category.label}
+        </h1>
+      </div>
+
       <AddSubCategoryButton category={category} />
 
       <SubcategoryList
@@ -41,9 +51,11 @@ export default async function AdminSubcategoryPage({
       />
 
       {category.subcategories.length === 0 && (
-        <p className="text-center text-gray-500 py-20">
-          Aucune prestation n&apos;est disponible dans cette catégorie.
-        </p>
+        <div className="rounded-xl border border-dashed border-[#394B39]/20 bg-[#FAF8F4] py-20 text-center">
+          <p className="text-[#1A2F1A]/60">
+            Aucune prestation n&apos;est disponible dans cette catégorie.
+          </p>
+        </div>
       )}
     </main>
   );

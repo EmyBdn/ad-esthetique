@@ -57,7 +57,15 @@ export default function SubcategoryList({
 
   return (
     <DragDropProvider onDragEnd={handleOnDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div
+        className={`grid grid-cols-1 gap-8 justify-center ${
+          items.length === 1
+            ? "max-w-sm mx-auto"
+            : items.length === 2
+              ? "sm:grid-cols-2 max-w-3xl mx-auto"
+              : "sm:grid-cols-2 xl:grid-cols-3"
+        }`}
+      >
         {items.map((subcategory, index) => (
           <SubcategoryCard
             key={subcategory.id}
