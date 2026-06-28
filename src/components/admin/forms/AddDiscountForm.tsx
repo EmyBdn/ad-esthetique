@@ -4,6 +4,8 @@ import { Modal } from "@/components/admin/Modal";
 import { useActionState, useEffect, useState } from "react";
 import { createDiscount } from "@/actions/discountActions";
 import { toast } from "react-toastify";
+import { FormField } from "@/components/admin/forms/FormField";
+import { FormActions } from "@/components/admin/forms/FormActions";
 
 type Props = {
   onClose: () => void;
@@ -28,7 +30,6 @@ export function AddDiscountForm({
   services,
 }: Props) {
   const [state, action, pending] = useActionState(createDiscount, null);
-
   const [targetType, setTargetType] = useState("category");
 
   const targetOptions =
@@ -53,33 +54,55 @@ export function AddDiscountForm({
 
   return (
     <Modal onClose={onClose}>
-      <form action={action} className="space-y-4">
-        <input name="label" placeholder="Nom de la promotion" />
+      <form action={action} className="space-y-5">
+        <div>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#1A2F1A]/60">
+            Offres
+          </p>
 
-        <select
+          <h2 className="font-serif text-3xl text-[#394B39]">
+            Ajouter une promotion
+          </h2>
+        </div>
+
+        <FormField
+          label="Nom de la promotion"
+          name="label"
+          placeholder="Ex : Offre printemps"
+        />
+
+        <FormField
+          label="Appliquer à"
           name="targetType"
+          select
           value={targetType}
           onChange={(e) => setTargetType(e.target.value)}
         >
           <option value="category">Catégories</option>
           <option value="subcategory">Sous-catégories</option>
           <option value="service">Services</option>
-        </select>
+        </FormField>
 
-        <select name="targetIds" multiple>
+        <FormField label="Éléments concernés" name="targetIds" select multiple>
           {targetOptions.map((item) => (
             <option key={item.id} value={item.id}>
               {item.label}
             </option>
           ))}
-        </select>
+        </FormField>
 
-        <select name="discountType" defaultValue="PERCENTAGE">
+        <FormField
+          label="Type de remise"
+          name="discountType"
+          select
+          defaultValue="PERCENTAGE"
+        >
           <option value="PERCENTAGE">Pourcentage</option>
           <option value="AMOUNT">Montant fixe</option>
-        </select>
+        </FormField>
 
-        <input
+        <FormField
+          label="Valeur"
           type="number"
           name="value"
           placeholder="Valeur de la remise"
@@ -87,15 +110,16 @@ export function AddDiscountForm({
           min="0"
         />
 
-        <input type="date" name="startDate" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FormField label="Date de début" type="date" name="startDate" />
+          <FormField label="Date de fin" type="date" name="endDate" />
+        </div>
 
-        <input type="date" name="endDate" />
-
-        <input
-          type="submit"
-          name="submit"
-          value={pending ? "Création..." : "Créer la promotion"}
-          disabled={pending}
+        <FormActions
+          pending={pending}
+          submitLabel="Créer la promotion"
+          pendingLabel="Création..."
+          onCancel={onClose}
         />
       </form>
     </Modal>

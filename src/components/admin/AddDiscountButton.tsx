@@ -20,9 +20,10 @@ export function AddDiscountButton({
     <>
       <button
         onClick={() => setState(true)}
-        className="absolute right-0 bg-slate-800 text-white px-6 py-3 rounded-full shadow-md hover:bg-slate-700 transition-all font-bold flex items-center gap-2"
+        className="absolute right-6 top-12 flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#394B39] px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-[#B7D8A8] hover:text-[#394B39] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1A2F1A]"
       >
-        <span className="text-xl">+</span> Ajouter une promotion
+        <span className="text-lg leading-none">+</span>
+        Ajouter une promotion
       </button>
 
       {state && (

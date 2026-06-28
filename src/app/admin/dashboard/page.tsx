@@ -8,14 +8,24 @@ export default async function AdminDashboardPage() {
   });
 
   return (
-    <main className="mx-auto max-w-6xl px-6 relative">
+    <main className="relative mx-auto max-w-6xl px-6 py-12">
+      <div className="mb-10 pr-0 sm:pr-64">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#1A2F1A]/60">
+          Catalogue
+        </p>
+
+        <h1 className="font-serif text-3xl text-[#394B39] sm:text-4xl">
+          Prestations
+        </h1>
+      </div>
+
       <AddCategoryButton />
 
       <CategoryList categories={categories} />
 
       {categories.length === 0 && (
-        <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-2xl">
-          <p className="text-gray-500">Votre catalogue est vide.</p>
+        <div className="rounded-xl border border-dashed border-[#394B39]/20 bg-[#FAF8F4] py-20 text-center">
+          <p className="text-[#1A2F1A]/60">Votre catalogue est vide.</p>
         </div>
       )}
     </main>

@@ -5,6 +5,8 @@ import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { createService } from "@/actions/serviceActions";
 import { Subcategory } from "@/../prisma/generated/prisma/client";
+import { FormField } from "@/components/admin/forms/FormField";
+import { FormActions } from "@/components/admin/forms/FormActions";
 
 type Props = {
   onClose: () => void;
@@ -22,30 +24,63 @@ export function AddServiceForm({ onClose, subcategory }: Props) {
       }
 
       if (!state.success) {
-        toast.error(state.error ?? "Impossible de créer le services.");
+        toast.error(state.error ?? "Impossible de créer le service.");
       }
     }
   }, [state, onClose]);
+
   return (
     <Modal onClose={onClose}>
-      <form action={action}>
-        <input name="label" placeholder="Nom du service" />
-        <input
-          name="duration"
-          placeholder="Durée de la prestation (en minutes)"
-          type="number"
-          min="0"
-        />
-        <input
-          name="price"
-          placeholder="Prix de la prestation"
-          type="number"
-          min="0"
+      <form action={action} className="space-y-5">
+        <input hidden name="subcategoryId" value={subcategory.id} />
+
+        <div>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#1A2F1A]/60">
+            {subcategory.label}
+          </p>
+
+          <h2 className="font-serif text-3xl text-[#394B39]">
+            Ajouter un service
+          </h2>
+        </div>
+
+        <FormField
+          label="Nom du service"
+          name="label"
+          placeholder="Ex : Soin éclat"
         />
 
-        <input name="details" placeholder="Détails de la prestation" />
-        <input hidden name="subcategoryId" value={subcategory.id} />
-        <input type={"submit"} name="submit" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FormField
+            label="Durée"
+            name="duration"
+            placeholder="En minutes"
+            type="number"
+            min="0"
+          />
+
+          <FormField
+            label="Prix"
+            name="price"
+            placeholder="Ex : 45"
+            type="number"
+            min="0"
+          />
+        </div>
+
+        <FormField
+          label="Détails"
+          name="details"
+          placeholder="Détails de la prestation"
+          textarea
+        />
+
+        <FormActions
+          pending={pending}
+          submitLabel="Ajouter"
+          pendingLabel="Création..."
+          onCancel={onClose}
+        />
       </form>
     </Modal>
   );

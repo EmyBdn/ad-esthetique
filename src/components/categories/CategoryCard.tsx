@@ -10,6 +10,7 @@ import { DeleteIcon } from "@/components/admin/icons/DeleteIcon";
 import Image from "next/image";
 import { useSortable } from "@dnd-kit/react/sortable";
 import DragIcon from "@/components/admin/icons/DragIcon";
+
 export default function CategoryCard({
   category,
   index,
@@ -28,29 +29,39 @@ export default function CategoryCard({
     <div
       ref={ref}
       key={category.id}
-      className="relative group hover:transition-all hover:-translate-y-1"
+      className="group relative transition-all hover:-translate-y-1"
     >
-      <div className="absolute top-4 left-4 z-10 flex gap-2">
+      <div className="absolute left-4 top-4 z-10 flex gap-2">
         <button
           ref={handleRef}
           title="Déplacer"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 cursor-grab active:cursor-grabbing flex align-center justify-center"
+          className="flex items-center justify-center rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:bg-[#FAF8F4] hover:text-[#394B39] active:cursor-grabbing cursor-grab"
         >
           <DragIcon />
         </button>
       </div>
-      <div className="absolute top-4 right-4 z-10 flex gap-2">
+
+      <div className="absolute right-4 top-4 z-10 flex gap-2">
         <button
           onClick={() => setModalIsOpen(true)}
           title="Modifier la catégorie"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm hover:shadow-md text-slate-600 hover:text-blue-600 hover:scale-110 transition-all"
+          className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:bg-[#B7D8A8]/30 hover:text-[#394B39] hover:scale-110"
         >
           <EditIcon />
         </button>
+
         <button
           title="Supprimer la catégorie"
-          className="p-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-slate-600 hover:text-red-600 hover:scale-110 transition-all"
-          onClick={() => deleteCategory(category.id)}
+          className="rounded-full bg-white/90 p-2 text-[#394B39]/60 shadow-sm backdrop-blur transition hover:bg-red-50 hover:text-red-600 hover:scale-110"
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Supprimer définitivement cette catégorie ?",
+            );
+
+            if (!confirmed) return;
+
+            deleteCategory(category.id);
+          }}
         >
           <DeleteIcon />
         </button>
@@ -58,29 +69,36 @@ export default function CategoryCard({
 
       <Link
         href={`/admin/dashboard/${category.slug}`}
-        className="block overflow-hidden rounded-xl bg-white shadow-sm border border-gray-100"
+        className="block overflow-hidden rounded-xl border border-[#394B39]/10 bg-white shadow-sm transition hover:shadow-md"
       >
-        <div className="relative aspect-video overflow-hidden bg-gray-100">
+        <div className="relative aspect-video overflow-hidden bg-[#FAF8F4]">
           {category.image ? (
             <Image
               src={category.image}
               alt={category.label}
               fill
-              className="object-cover"
+              className="object-cover transition duration-500"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-gray-400 text-xs italic">
+            <div className="flex h-full items-center justify-center text-xs italic text-[#1A2F1A]/40">
               Aucune image
             </div>
           )}
         </div>
+
         <div className="p-6">
-          <h3 className="font-semibold text-xl text-gray-800 group-hover:text-[#B7D8A8] transition-colors">
+          <h3 className="text-center font-serif text-2xl leading-none tracking-tight text-[#394B39] transition-colors">
             {category.label}
           </h3>
-          <p>{category.description}</p>
+
+          {category.description && (
+            <p className="mt-4 text-sm font-light leading-relaxed text-[#1A2F1A]/70">
+              {category.description}
+            </p>
+          )}
         </div>
       </Link>
+
       {modalIsOpen && (
         <UpdateCategoryForm
           category={category}

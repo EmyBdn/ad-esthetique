@@ -145,7 +145,7 @@ export default async function PrestationDetailsPage({
                                   {originalPrice}€
                                 </p>
 
-                                <p className="text-lg font-semibold text-[#394B39]">
+                                <p className="font-semibold text-[#394B39]">
                                   {discountedPrice}€
                                 </p>
                               </>
